@@ -4,8 +4,8 @@
 #include		<vector>
 
 FileContact::FileContact(const std::string &pseudo)
-  : _pseudo(pseudo)
 {
+	this->_pseudo = "accounts/" + pseudo;
 }
 
 FileContact::~FileContact()
