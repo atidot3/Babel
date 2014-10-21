@@ -9,33 +9,46 @@
 
 Client::Client(string Username)
 {
-	this->Name = Username;
+  this->Name = Username;
 }
 Client::~Client()
 {
-	CONTACTIT IT = myList.begin();
-	while (IT != myList.end())
-	{
-		myList.erase(IT);
-	}
+  CONTACTIT IT = myList.begin();
+  while (IT != myList.end())
+    {
+      myList.erase(IT);
+    }
 }
 Client::CONTACTLIST	Client::getContact()
 {
-	return this->myList;
+  return this->myList;
 }
-bool			Client::addClient(const std::string &pseudo)
+bool			Client::addContact(const std::string &pseudo)
 {
-  
+  /* contacts.write(pseudo); */
 }
 bool			Client::removeClient(const std::string &pseudo)
 {
-
+  /* contacts.erase(pseudo); */
 }
-Client*			Client::getClient()
-{
-	return this;
-}
-bool			Client::findClient(const std::string &pseudo)
-{
 
+std::string		Client::IsAskingConnection()
+{
+  /* Entrer dans cette fonction si le client veut demander un appel à quelqu'un
+
+     Récupère le pseudo du contact à appeller
+     return le pseudo
+  */
+}
+
+ISocket*		Client::acceptConnection(const std::string &pseudo)
+{
+  /* demande au client s'il veut répondre à pseudo
+
+     attends la réponse
+     si oui -> return socket
+     si non -> return NULL
+
+     si celui qui appelle raccroche avant la réponse -> return NULL
+ */
 }
