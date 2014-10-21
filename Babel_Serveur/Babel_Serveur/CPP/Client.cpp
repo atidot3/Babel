@@ -4,32 +4,39 @@
 *
 */
 
-#include "Include\server.h"
-#include "Include\Client.h"
+#include "Client.h"
 
-Client::Client(string Username)
+Client::Client(const std::string &Username)
 {
-	this->pseudo = Username;
+  this->pseudo = Username;
+  this->contacts = new FileContact(Username);
 }
+
 Client::~Client()
 {
   CONTACTIT IT = myList.begin();
+
   while (IT != myList.end())
     {
       myList.erase(IT);
     }
 }
+
 Client::CONTACTLIST	Client::getContact()
 {
   return this->myList;
 }
+
 bool			Client::addContact(const std::string &pseudo)
 {
-  /* contacts.write(pseudo); */
+  contacts->add(pseudo);
+  return (true);
 }
+
 bool			Client::removeContact(const std::string &pseudo)
 {
-  /* contacts.erase(pseudo); */
+  contacts->erase(pseudo);
+  return (true);
 }
 
 std::string		Client::IsAskingConnection()
@@ -39,6 +46,7 @@ std::string		Client::IsAskingConnection()
      Récupère le pseudo du contact à appeller
      return le pseudo
   */
+  return ("blabla");
 }
 
 ISocket*		Client::acceptConnection(const std::string &pseudo)
@@ -51,6 +59,7 @@ ISocket*		Client::acceptConnection(const std::string &pseudo)
 
      si celui qui appelle raccroche avant la réponse -> return NULL
  */
+  return (sock);
 }
 bool			Client::isBusy()
 {

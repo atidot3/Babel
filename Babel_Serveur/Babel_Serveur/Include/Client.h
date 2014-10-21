@@ -5,6 +5,7 @@
 #include <list>
 #include <iostream>
 #include <map>
+#include "FileContact.hh"
 
 class ISocket;
 
@@ -19,13 +20,13 @@ private:
 	ISocket		*sock;
 	bool		busy;
 	bool		called;
-	//FileContact	contacts;
+	FileContact	*contacts;
 	CONTACTLIST	myList;
 	std::string	pseudo;
 	/* protocol reading */
 
 public:
-	Client(std::string Username);
+	Client(const std::string &Username);
 	~Client();
 	CONTACTLIST	getContact();
 private:
