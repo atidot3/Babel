@@ -78,6 +78,7 @@
     <ClInclude Include="Include\ClientManager.h" />
     <ClInclude Include="Include\iSocket.h" />
     <ClInclude Include="Include\log.h" />
+    <ClInclude Include="Include\Protocole.h" />
     <ClInclude Include="Include\server.h" />
     <ClInclude Include="Include\socketException.h" />
     <ClInclude Include="Include\socketWindows.h" />
@@ -86,10 +87,14 @@
     <ClCompile Include="CPP\Babel_Serveur.cpp" />
     <ClCompile Include="CPP\Client.cpp" />
     <ClCompile Include="CPP\ClientManager.cpp" />
+    <ClCompile Include="CPP\FileContact.cpp" />
     <ClCompile Include="CPP\log.cpp" />
     <ClCompile Include="CPP\server.cpp" />
     <ClCompile Include="CPP\socketException.cpp" />
     <ClCompile Include="CPP\socketWindows.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Include\FileContact.hh" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
