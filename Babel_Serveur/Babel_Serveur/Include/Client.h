@@ -6,10 +6,12 @@
 #include <iostream>
 #include <map>
 
+class ISocket;
+
 class Client
 {
  private:
-	typedef std::list<string> CONTACTLIST;
+	typedef std::list<std::string> CONTACTLIST;
 	typedef CONTACTLIST::value_type CONTACTVAL;
 	typedef CONTACTLIST::iterator CONTACTIT;
 
@@ -17,15 +19,13 @@ private:
 	ISocket		*sock;
 	bool		busy;
 	bool		called;
-	ifstream	fdRead;
-	ofstream	fdWrite;
-	FileContact	contacts;
+	//FileContact	contacts;
 	CONTACTLIST	myList;
 	std::string	pseudo;
 	/* protocol reading */
 
 public:
-	Client(string Username);
+	Client(std::string Username);
 	~Client();
 	CONTACTLIST	getContact();
 private:
@@ -34,6 +34,7 @@ private:
 	std::string			IsAskingConnection();
 	ISocket*			acceptConnection(const std::string &);
 	bool				isBusy();
+	bool				isCalled();
 };
 
 #endif

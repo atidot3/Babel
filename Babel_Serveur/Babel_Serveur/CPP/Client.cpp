@@ -9,7 +9,7 @@
 
 Client::Client(string Username)
 {
-  this->Name = Username;
+	this->pseudo = Username;
 }
 Client::~Client()
 {
@@ -27,7 +27,7 @@ bool			Client::addContact(const std::string &pseudo)
 {
   /* contacts.write(pseudo); */
 }
-bool			Client::removeClient(const std::string &pseudo)
+bool			Client::removeContact(const std::string &pseudo)
 {
   /* contacts.erase(pseudo); */
 }
@@ -51,4 +51,12 @@ ISocket*		Client::acceptConnection(const std::string &pseudo)
 
      si celui qui appelle raccroche avant la réponse -> return NULL
  */
+}
+bool			Client::isBusy()
+{
+	return this->busy;
+}
+bool			Client::isCalled()
+{
+	return this->called;
 }
