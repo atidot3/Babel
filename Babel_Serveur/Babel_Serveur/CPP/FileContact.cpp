@@ -1,8 +1,11 @@
-#include		"FileContact.hh"
+#include		"Include\FileContact.hh"
+#include		<string>
+#include		<iostream>
+#include		<vector>
 
 FileContact::FileContact(const std::string &pseudo)
 {
-  _pseudo = "accounts/" + pseudo;
+  this->_pseudo = "accounts/" + pseudo;
 }
 
 FileContact::~FileContact()
