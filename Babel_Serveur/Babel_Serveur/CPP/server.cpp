@@ -35,6 +35,13 @@ bool		Server::FindUser(const char* UserID)
 		return false;
 	return true;
 }
+Client*		Server::GetUserSession(const char* UserID)
+{
+	USERIT it = m_userList.find(string(UserID));
+	if( it == m_userList.end() )
+		return NULL;
+	return it->second;
+}
 void		Server::run()
 {
 	string	buff, ip;

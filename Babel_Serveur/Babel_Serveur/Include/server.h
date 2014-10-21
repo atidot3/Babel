@@ -28,7 +28,7 @@ private:
 	bool	AddUser(const char* UserID, Client* newUser);
 	void	RemoveUser(const char* UserID);
 	bool	FindUser(const char* UserID);
-	void	GetUserSession(const char* UserID, Client *requested);
+	Client*	GetUserSession(const char* UserID);
 };
 
 #endif
