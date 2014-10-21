@@ -10,6 +10,8 @@ class			FileContact
   std::list<
     std::string>	_list;
 
+private:
+  bool			checkExistence(const std::string &);
 public:
   FileContact(const std::string &);
   ~FileContact();
