@@ -75,6 +75,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Include\Client.h" />
+    <ClInclude Include="Include\ClientManager.h" />
     <ClInclude Include="Include\iSocket.h" />
     <ClInclude Include="Include\log.h" />
     <ClInclude Include="Include\server.h" />
@@ -84,6 +85,7 @@
   <ItemGroup>
     <ClCompile Include="CPP\Babel_Serveur.cpp" />
     <ClCompile Include="CPP\Client.cpp" />
+    <ClCompile Include="CPP\ClientManager.cpp" />
     <ClCompile Include="CPP\log.cpp" />
     <ClCompile Include="CPP\server.cpp" />
     <ClCompile Include="CPP\socketException.cpp" />

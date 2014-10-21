@@ -1,13 +1,9 @@
 #ifndef				CLIENTMANAGER_HH_
 # define			CLIENTMANAGER_HH_
 
-# include			<map>
-# include			<string>
-
-class				Client
-{
-
-};
+#include			<map>
+#include			<string>
+#include			"Client.h"
 
 class				ClientManager
 {
