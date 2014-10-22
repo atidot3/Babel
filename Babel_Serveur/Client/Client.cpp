@@ -40,7 +40,12 @@ void		Client::run()
 	try
 	{
 		running = true;
-		socket->send("salut", "127.0.0.1", SERVER_PORT);
+		//socket->send("salut", "127.0.0.1", SERVER_PORT);
+		Struct_Proto t;
+		t.audio = 9000;
+		strcpy(t.Buffer, "Je test ma race");
+		t.EnumId = 7000;
+		socket->sendToSomeone(&t, "127.0.0.1", SERVER_PORT);
 	    buff = socket->recv(100, &adresse);
 	    if (buff == WELCOME)
 	    {

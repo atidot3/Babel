@@ -19,7 +19,13 @@
 #define SUCCESS	1
 #define FAILURE	-1
 #define ERROR_INSTRUCTION "Bad Instruction\n"
-
+struct				Proto_Struct
+{
+	int				EnumId;
+	char			Buffer[512];
+	int				audio;
+};
+typedef				Proto_Struct Struct_Proto;
 /* fonction parser selon le type d'objet */
 #define MESSAGE_LIST(ITEM)                          \
                                        ITEM(player), \

@@ -91,7 +91,22 @@ void SocketWindows::send(const std::string& buf, std::string ip, int port)
             throw new SocketException("Could not write to socket.");
     }
 }
-
+void		SocketWindows::sendToSomeone(Struct_Proto* stru, std::string ip, int port)
+{
+	SOCKADDR_IN toSin;
+    toSin.sin_addr.s_addr = inet_addr(ip.c_str());
+    toSin.sin_family = AF_INET;
+    toSin.sin_port	= htons(port);
+	sendto(this->hSocket, (char*)stru, sizeof(stru), 0, (SOCKADDR *)&toSin, sizeof(toSin));
+}
+Struct_Proto		*SocketWindows::recvFromSomeone(std::string ip, int port)
+{
+	Struct_Proto* t = new Struct_Proto();
+    SOCKADDR_IN fromSin;
+    int fromLen = sizeof(fromSin);
+	recvfrom(this->hSocket, (char*)t, sizeof(t), 0, (SOCKADDR *)&fromSin, &fromLen);
+	return t;
+}
 std::string SocketWindows::recv(int len, string* ip)
 {
     char *buf = new char[len];
