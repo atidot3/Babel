@@ -24,3 +24,5 @@ FORMS    += mainwindow.ui \
 
 RESOURCES += \
     Assets.qrc
+
+LIBS += -L$$PWD/lib -lportaudio -lopus
