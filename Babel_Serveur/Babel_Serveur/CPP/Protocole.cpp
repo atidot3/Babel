@@ -28,7 +28,7 @@ void		Protocole::Protocole_to_call(const int id, const std::string Str)
 {
 	switch (id)
 	{
-		case WELCOME:
+		case SALUT:
 		{
 			this->Contact_Call_Me(Str);
 			break;

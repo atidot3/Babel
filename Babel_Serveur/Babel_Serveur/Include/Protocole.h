@@ -6,13 +6,20 @@
 #include			<map>
 #include			"Include\log.h"
 
+struct				Proto_Struct
+{
+	int				EnumId;
+	char			Buffer[512];
+	int				audio;
+};
+typedef				Proto_Struct Struct_Proto;
 class				Protocole
 {
 private:
 	enum			PROTOCOLE_ENUM
 	{
 		PROTOCOLE_BEGIN = 0,
-	    WELCOME,
+	    SALUT,
 		CONTACT_LIST,
 		CONTACT_ADD,
 		CONTACT_REMOVE,
@@ -25,7 +32,6 @@ public:
 	~Protocole();
 	void			Protocole_to_call(const int id, std::string Str);
 private:
-	//int pour l'audio
 	void			Welcome(std::string pseudo);
 	void			Contact_List(std::string pseudo);
 	void			Contact_Add(std::string pseudo);
@@ -34,4 +40,4 @@ private:
 	void			Contact_To_Call(std::string pseudo);
 };
 
-#endif
+#endif // PROTOCOLE
