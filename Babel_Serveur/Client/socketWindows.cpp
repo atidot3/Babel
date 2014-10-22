@@ -101,14 +101,15 @@ void		SocketWindows::sendToSomeone(Struct_Proto* stru, std::string ip, int port)
 }
 Struct_Proto		*SocketWindows::recvFromSomeone(std::string ip, int port)
 {
-	Struct_Proto* t;
+	Struct_Proto t;
+	t.audio = 0;
+	memcpy(t.Buffer, "", 0);
+	t.EnumId = 0;
     SOCKADDR_IN fromSin;
     int fromLen = sizeof(fromSin);
-	if ((recvfrom(this->hSocket, (char*)t, sizeof(t), 0, (SOCKADDR *)&fromSin, &fromLen)) == -1)
+	if ((recvfrom(this->hSocket, (char*)&t, sizeof(Struct_Proto), 0, (SOCKADDR *)&fromSin, &fromLen)) == -1)
 		throw new SocketException("Could not read on UDP socket.");
-	if (t)
-		printf("IDK\n");
-	return t;
+	return &t;
 }
 std::string SocketWindows::recv(int len, string* ip)
 {

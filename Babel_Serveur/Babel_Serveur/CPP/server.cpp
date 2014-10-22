@@ -54,7 +54,7 @@ void		Server::run()
 		while (running == true)
 		{
 			Struct_Proto* t = socket->recvFromSomeone(ip, 100);
-			printf("audio: %d, enum: %d, string: %s\n", t->audio, t->EnumId, t->Buffer);
+			printf("audio: %d, enum: %d, string: %s, test: %s\n", t->audio, t->EnumId, t->Buffer, (char*) t);
 			cout << t->audio << " " << t->Buffer << " " << t->EnumId << endl;
 			//buff = socket->recv(100, &ip);
 			cout << "Buff received" << ip << endl;
