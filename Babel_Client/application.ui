@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Application</class>
+ <widget class="QWidget" name="Application">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>283</width>
+    <height>489</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>283</width>
+    <height>489</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>283</width>
+    <height>489</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Babel - 1.0.0</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="Assets.qrc">
+    <normaloff>:/call.png</normaloff>:/call.png</iconset>
+  </property>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>40</y>
+     <width>191</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Liste des personnes connectés :</string>
+   </property>
+  </widget>
+  <widget class="QListWidget" name="contactList">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>60</y>
+     <width>256</width>
+     <height>311</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>Tolo</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Carré</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Bottom</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QPushButton" name="btCall">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>430</y>
+     <width>101</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Appeler</string>
+   </property>
+   <property name="icon">
+    <iconset resource="Assets.qrc">
+     <normaloff>:/call.png</normaloff>:/call.png</iconset>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btHang">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>430</y>
+     <width>101</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Raccrocher</string>
+   </property>
+   <property name="icon">
+    <iconset resource="Assets.qrc">
+     <normaloff>:/hangup.png</normaloff>:/hangup.png</iconset>
+   </property>
+  </widget>
+  <widget class="QLabel" name="tvStatus">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>380</y>
+     <width>241</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+ </widget>
+ <resources>
+  <include location="Assets.qrc"/>
+ </resources>
+ <connections/>
+</ui>
