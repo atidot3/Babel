@@ -1,14 +1,14 @@
-#include	"Include\Protocole.h"
+#include	"Include/Protocole.h"
 
 Protocole::Protocole()
 {
-  func_tab[0] = Protocole::Welcome;
-  func_tab[1] = Protocole::Contact_List;
-  func_tab[2] = Protocole::Contact_Add;
-  func_tab[3] = Protocole::Contact_Remove;
-  func_tab[4] = Protocole::Contact_Call_Me;
-  func_tab[5] = Protocle::Contact_To_Call;
-  func_tab[6] = Protocole::Authentification;
+  func_tab[0] = &Protocole::Welcome;
+  func_tab[1] = &Protocole::Contact_List;
+  func_tab[2] = &Protocole::Contact_Add;
+  func_tab[3] = &Protocole::Contact_Remove;
+  func_tab[4] = &Protocole::Contact_Call_Me;
+  func_tab[5] = &Protocole::Contact_To_Call;
+  func_tab[6] = &Protocole::Authentification;
 }
 
 Protocole::~Protocole()
