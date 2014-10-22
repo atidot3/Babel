@@ -2,9 +2,11 @@
 # define SERVER
 
 #include <list>
+#include <string>
 #include <iostream>
 #include <map>
 #include "Include\log.h"
+#include "Include\Protocole.h"
 #include "Include\iSocket.h"
 #include "Include\Client.h"
 
@@ -19,6 +21,7 @@ public:
 	void		run();
 	void		stop();
 private:
+	Protocole	*proto;
 	bool		running;
 	ISocket		*socket;
 	typedef std::map<string, Client*> USERLIST;

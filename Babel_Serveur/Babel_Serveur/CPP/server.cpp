@@ -5,6 +5,7 @@
 Server::Server(int port) : running(false)
 {
 	socket = new AbstractSocket(port);
+	proto = new Protocole();
 }
 
 Server::~Server()
@@ -57,12 +58,13 @@ void		Server::run()
 			if ((this->FindUser(ip.c_str())) == true)
 			{
 				cout << "client already connected, exiting..." << ip << endl;
-				Logger::Instance()->log(0, "client already connected, exiting...\n");
+				Logger::Instance()->log(1, "client already connected:" + ip + ", exiting...\n");
 				buff = "";
 		    }
 			socket->send("salut", ip, CLIENT_PORT);
 		    if (buff == WELCOME)
 		    {
+				Logger::Instance()->log(0, "Client connected: " + ip + ".\n");
 				cout << "New client " << ip.c_str() << endl;
 				Client* NewOne = new Client(ip.c_str());
 				this->AddUser(ip.c_str(), NewOne);

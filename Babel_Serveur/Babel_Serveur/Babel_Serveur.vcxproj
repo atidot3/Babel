@@ -89,6 +89,7 @@
     <ClCompile Include="CPP\ClientManager.cpp" />
     <ClCompile Include="CPP\FileContact.cpp" />
     <ClCompile Include="CPP\log.cpp" />
+    <ClCompile Include="CPP\Protocole.cpp" />
     <ClCompile Include="CPP\server.cpp" />
     <ClCompile Include="CPP\socketException.cpp" />
     <ClCompile Include="CPP\socketWindows.cpp" />

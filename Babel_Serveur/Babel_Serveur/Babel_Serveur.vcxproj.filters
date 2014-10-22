@@ -71,6 +71,9 @@
     <ClCompile Include="CPP\FileContact.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="CPP\Protocole.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Include\FileContact.hh">
