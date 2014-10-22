@@ -20,6 +20,7 @@ private:
 	{
 		PROTOCOLE_BEGIN = 0,
 	    SALUT,
+		AUTH,
 		CONTACT_LIST,
 		CONTACT_ADD,
 		CONTACT_REMOVE,
@@ -30,7 +31,7 @@ private:
 public:
 	Protocole();
 	~Protocole();
-	void			Protocole_to_call(const int id, std::string Str);
+	void			Protocole_to_call(const int id, std::string str);
 private:
 	void			Welcome(std::string pseudo);
 	void			Contact_List(std::string pseudo);
@@ -38,6 +39,7 @@ private:
 	void			Contact_Remove(std::string pseudo);
 	void			Contact_Call_Me(std::string pseudo);
 	void			Contact_To_Call(std::string pseudo);
+	void			Authentification(std::string pseudo);
 };
 
 #endif // PROTOCOLE

@@ -34,44 +34,44 @@ void		Protocole::Authentification(const std::string pseudo)
 {
 	std::cout << "Auth" << std::endl;
 }
-void		Protocole::Protocole_to_call(const int id, const std::string Str)
+void		Protocole::Protocole_to_call(const int id, const std::string str)
 {
 	std::cout << id << std::endl;
 	switch (id)
 	{
 		case SALUT:
 		{
-			this->Welcome(Str);
+			this->Welcome(str);
 			break;
 		}
 		case CONTACT_LIST:
 		{
-			this->Contact_List(Str);
+			this->Contact_List(str);
 			break;
 		}
 		case CONTACT_ADD:
 		{
-			this->Contact_Add(Str);
+			this->Contact_Add(str);
 			break;
 		}
 		case CONTACT_REMOVE:
 		{
-			this->Contact_Remove(Str);
+			this->Contact_Remove(str);
 			break;
 		}
 		case CONTACT_CALL_ME:
 		{
-			this->Contact_Call_Me(Str);
+			this->Contact_Call_Me(str);
 			break;
 		}
 		case CONTACT_TO_CALL:
 		{
-			this->Contact_To_Call(Str);
+			this->Contact_To_Call(str);
 			break;
 		}
 		case AUTH:
 		{
-			this->Authentification(Str);
+			this->Authentification(str);
 			break;
 		}
 		default:
