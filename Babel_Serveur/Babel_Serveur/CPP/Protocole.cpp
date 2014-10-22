@@ -30,6 +30,10 @@ void		Protocole::Contact_To_Call(const std::string pseudo)
 {
 	std::cout << "Contact_To_Call" << std::endl;
 }
+void		Protocole::Authentification(const std::string pseudo)
+{
+	std::cout << "Auth" << std::endl;
+}
 void		Protocole::Protocole_to_call(const int id, const std::string Str)
 {
 	std::cout << id << std::endl;
@@ -63,6 +67,11 @@ void		Protocole::Protocole_to_call(const int id, const std::string Str)
 		case CONTACT_TO_CALL:
 		{
 			this->Contact_To_Call(Str);
+			break;
+		}
+		case AUTH:
+		{
+			this->Authentification(Str);
 			break;
 		}
 		default:
