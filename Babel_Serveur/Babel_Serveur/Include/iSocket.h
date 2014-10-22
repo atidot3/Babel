@@ -17,7 +17,7 @@ public:
 	virtual ISocket* accept() = 0;
 	virtual void send(const std::string&, std::string ip = "", int port = 0) = 0;
 	virtual void	sendToSomeone(Struct_Proto* stru, std::string ip, int port) = 0;
-	virtual	Struct_Proto*	recvFromSomeone(std::string ip, int port) = 0;
+	virtual	void	recvFromSomeone(std::string ip, int port, Struct_Proto *t) = 0;
 	virtual std::string recv(int, std::string* ip = NULL) = 0;
 
 private:

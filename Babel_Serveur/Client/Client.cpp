@@ -42,9 +42,9 @@ void		Client::run()
 		running = true;
 		//socket->send("salut", "127.0.0.1", SERVER_PORT);
 		Struct_Proto t;
-		t.audio = 9000;
+		t.audio = 1;
 		strcpy(t.Buffer, "Je test ma race");
-		t.EnumId = 7000;
+		t.EnumId = 1;
 		socket->sendToSomeone(&t, "127.0.0.1", SERVER_PORT);
 	    buff = socket->recv(100, &adresse);
 	    if (buff == WELCOME)

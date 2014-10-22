@@ -53,25 +53,11 @@ void		Server::run()
 		running = true;
 		while (running == true)
 		{
-			Struct_Proto* t = socket->recvFromSomeone(ip, 100);
-			printf("audio: %d, enum: %d, string: %s, test: %s\n", t->audio, t->EnumId, t->Buffer, (char*) t);
-			cout << t->audio << " " << t->Buffer << " " << t->EnumId << endl;
-			//buff = socket->recv(100, &ip);
-			cout << "Buff received" << ip << endl;
-			if ((this->FindUser(ip.c_str())) == true)
-			{
-				cout << "client already connected, exiting..." << ip << endl;
-				Logger::Instance()->log(1, "client already connected:" + ip + ", exiting...\n");
-				buff = "";
-		    }
-			/*socket->send("salut", ip, CLIENT_PORT);
-		    if (buff == WELCOME)
-		    {
-				Logger::Instance()->log(0, "Client connected: " + ip + ".\n");
-				cout << "New client " << ip.c_str() << endl;
-				Client* NewOne = new Client(ip.c_str());
-				this->AddUser(ip.c_str(), NewOne);
-			}*/
+			Struct_Proto* t = new Struct_Proto();
+			socket->recvFromSomeone(ip, 100, t);
+			printf("audio: %d, enum: %d, string: %s\n", t->audio, t->EnumId, t->Buffer);
+			proto->Protocole_to_call(t->EnumId, t->Buffer);			
+			delete t;
 		}
 	}
 	catch (std::exception *e)

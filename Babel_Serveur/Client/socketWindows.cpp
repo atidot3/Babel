@@ -97,19 +97,15 @@ void		SocketWindows::sendToSomeone(Struct_Proto* stru, std::string ip, int port)
     toSin.sin_addr.s_addr = inet_addr(ip.c_str());
     toSin.sin_family = AF_INET;
     toSin.sin_port	= htons(port);
-	sendto(this->hSocket, (char*)stru, sizeof(stru), 0, (SOCKADDR *)&toSin, sizeof(toSin));
+	if (::sendto(this->hSocket, (char*)stru, sizeof(Struct_Proto), 0, (SOCKADDR *)&toSin, sizeof(toSin)) == -1)
+		throw new SocketException("Could not write to adress.");
 }
-Struct_Proto		*SocketWindows::recvFromSomeone(std::string ip, int port)
+void		SocketWindows::recvFromSomeone(std::string ip, int port, Struct_Proto *t)
 {
-	Struct_Proto t;
-	t.audio = 0;
-	memcpy(t.Buffer, "", 0);
-	t.EnumId = 0;
     SOCKADDR_IN fromSin;
     int fromLen = sizeof(fromSin);
-	if ((recvfrom(this->hSocket, (char*)&t, sizeof(Struct_Proto), 0, (SOCKADDR *)&fromSin, &fromLen)) == -1)
+	if ((::recvfrom(this->hSocket, (char*)t, sizeof(Struct_Proto), 0, (SOCKADDR *)&fromSin, &fromLen)) == -1)
 		throw new SocketException("Could not read on UDP socket.");
-	return &t;
 }
 std::string SocketWindows::recv(int len, string* ip)
 {
