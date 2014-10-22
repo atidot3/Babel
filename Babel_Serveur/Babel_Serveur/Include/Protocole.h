@@ -25,6 +25,7 @@ public:
 	~Protocole();
 	void			Protocole_to_call(const int id, std::string Str);
 private:
+	//int pour l'audio
 	void			Welcome(std::string pseudo);
 	void			Contact_List(std::string pseudo);
 	void			Contact_Add(std::string pseudo);
