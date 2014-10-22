@@ -56,5 +56,5 @@ void		Protocole::Protocole_to_call(const int id, const std::string &str)
   if (id - 1 > 6)
     Logger::Instance()->log(2, "Protocole: Unknow enum\n");
   else
-    func_tab[id - 1](str);    
+	(*this.*func_tab[id - 1])(str);
 }
