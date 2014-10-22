@@ -12,7 +12,10 @@ struct				Proto_Struct
 	char			Buffer[512];
 	int				audio;
 };
+
 typedef				Proto_Struct Struct_Proto;
+typedef				void (Protocole::*ptr)(const std::string &);
+
 class				Protocole
 {
 private:
@@ -28,18 +31,19 @@ private:
 		CONTACT_TO_CALL,
 		PROTOCOLE_END
 	};
+	ptr			func_tab[7];
 public:
 	Protocole();
 	~Protocole();
-	void			Protocole_to_call(const int id, std::string str);
+	void			Protocole_to_call(const int id, const std::string &str);
 private:
-	void			Welcome(std::string pseudo);
-	void			Contact_List(std::string pseudo);
-	void			Contact_Add(std::string pseudo);
-	void			Contact_Remove(std::string pseudo);
-	void			Contact_Call_Me(std::string pseudo);
-	void			Contact_To_Call(std::string pseudo);
-	void			Authentification(std::string pseudo);
+	void			Welcome(const std::string &pseudo);
+	void			Contact_List(const std::string &pseudo);
+	void			Contact_Add(const std::string &pseudo);
+	void			Contact_Remove(const std::string &pseudo);
+	void			Contact_Call_Me(const std::string &pseudo);
+	void			Contact_To_Call(const std::string &pseudo);
+	void			Authentification(const std::string &pseudo);
 };
 
 #endif // PROTOCOLE
