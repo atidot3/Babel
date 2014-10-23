@@ -43,16 +43,24 @@ void		Client::run()
 		//socket->send("salut", "127.0.0.1", SERVER_PORT);
 		Struct_Proto t;
 		t.audio = 1;
-		strcpy(t.Buffer, "Je test ma race");
+		strcpy_s(t.ip,"127.0.0.1");
+		strcpy_s(t.Buffer, "salut");
 		t.EnumId = 1;
 		socket->sendToSomeone(&t, "127.0.0.1", SERVER_PORT);
-	    buff = socket->recv(100, &adresse);
-	    if (buff == WELCOME)
-	    {
-	        cout << "New client " << adresse << endl;
+		socket->recvFromSomeone(ip, SERVER_PORT, &t);
+		printf("%d, %s, %d\n", t.audio, t.Buffer, t.EnumId);
+	    if (strcmp(t.Buffer, WELCOME) == 0)
+		{
+			t.audio = 1;
+			strcpy_s(t.ip,"127.0.0.1");
+			strcpy_s(t.Buffer, "Atidote");
+			t.EnumId = 2;
+			socket->sendToSomeone(&t, "127.0.0.1", SERVER_PORT);
+			socket->recvFromSomeone(ip, SERVER_PORT, &t);
+			cout << "New client " << t.Buffer << endl;
 			while (running == true)
 			{
-				recv_socket(data);
+				
 			}
 	    }
 	}

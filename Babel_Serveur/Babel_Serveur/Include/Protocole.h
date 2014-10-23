@@ -20,7 +20,7 @@ typedef				Proto_Struct Struct_Proto;
 
 class				Protocole
 {
-  typedef				void (Protocole::*ptr)(Struct_Proto *t, const Server*);
+  typedef				void (Protocole::*ptr)(Struct_Proto *t, Server*);
 
  private:
   enum			PROTOCOLE_ENUM
@@ -41,13 +41,13 @@ class				Protocole
   ~Protocole();
   void			Protocole_to_call(Struct_Proto *t, Server* srv);
  private:
-  void			Welcome(Struct_Proto *t, const Server*);
-  void			Contact_List(Struct_Proto *t, const Server*);
-  void			Contact_Add(Struct_Proto *t, const Server*);
-  void			Contact_Remove(Struct_Proto *t, const Server*);
-  void			Contact_Call_Me(Struct_Proto *t, const Server*);
-  void			Contact_To_Call(Struct_Proto *t, const Server*);
-  void			Authentification(Struct_Proto *t, const Server*);
+  void			Welcome(Struct_Proto *t, Server*);
+  void			Contact_List(Struct_Proto *t, Server*);
+  void			Contact_Add(Struct_Proto *t, Server*);
+  void			Contact_Remove(Struct_Proto *t, Server*);
+  void			Contact_Call_Me(Struct_Proto *t, Server*);
+  void			Contact_To_Call(Struct_Proto *t, Server*);
+  void			Authentification(Struct_Proto *t, Server*);
 };
 
 #endif // PROTOCOLE
