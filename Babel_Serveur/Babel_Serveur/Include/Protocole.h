@@ -6,18 +6,21 @@
 #include			<map>
 #include			"Include\log.h"
 
+class				Server;
+
 struct				Proto_Struct
 {
 	int				EnumId;
 	char			Buffer[512];
 	int				audio;
+	char			ip[100];
 };
 
 typedef				Proto_Struct Struct_Proto;
 
 class				Protocole
 {
-  typedef				void (Protocole::*ptr)(const std::string &);
+  typedef				void (Protocole::*ptr)(Struct_Proto *t, const Server*);
 
  private:
   enum			PROTOCOLE_ENUM
@@ -36,15 +39,15 @@ class				Protocole
  public:
   Protocole();
   ~Protocole();
-  void			Protocole_to_call(const int id, const std::string &str);
+  void			Protocole_to_call(Struct_Proto *t, Server* srv);
  private:
-  void			Welcome(const std::string &pseudo);
-  void			Contact_List(const std::string &pseudo);
-  void			Contact_Add(const std::string &pseudo);
-  void			Contact_Remove(const std::string &pseudo);
-  void			Contact_Call_Me(const std::string &pseudo);
-  void			Contact_To_Call(const std::string &pseudo);
-  void			Authentification(const std::string &pseudo);
+  void			Welcome(Struct_Proto *t, const Server*);
+  void			Contact_List(Struct_Proto *t, const Server*);
+  void			Contact_Add(Struct_Proto *t, const Server*);
+  void			Contact_Remove(Struct_Proto *t, const Server*);
+  void			Contact_Call_Me(Struct_Proto *t, const Server*);
+  void			Contact_To_Call(Struct_Proto *t, const Server*);
+  void			Authentification(Struct_Proto *t, const Server*);
 };
 
 #endif // PROTOCOLE

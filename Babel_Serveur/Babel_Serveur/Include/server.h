@@ -20,10 +20,10 @@ public:
 	~Server();
 	void		run();
 	void		stop();
+	ISocket		*socket;
 private:
 	Protocole	*proto;
 	bool		running;
-	ISocket		*socket;
 	typedef std::map<string, Client*> USERLIST;
 	typedef USERLIST::value_type USERVAL;
 	typedef USERLIST::iterator USERIT;

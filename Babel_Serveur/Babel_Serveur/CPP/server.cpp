@@ -55,8 +55,7 @@ void		Server::run()
 		{
 			Struct_Proto* t = new Struct_Proto();
 			socket->recvFromSomeone(ip, 100, t);
-			printf("audio: %d, enum: %d, string: %s\n", t->audio, t->EnumId, t->Buffer);
-			proto->Protocole_to_call(t->EnumId, t->Buffer);
+			proto->Protocole_to_call(t, this);
 			delete t;
 		}
 	}

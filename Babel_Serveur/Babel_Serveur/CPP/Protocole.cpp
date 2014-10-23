@@ -1,4 +1,5 @@
 #include	"Include/Protocole.h"
+#include	"Include\server.h"
 
 Protocole::Protocole()
 {
@@ -15,46 +16,55 @@ Protocole::~Protocole()
 {
 }
 
-void		Protocole::Welcome(const std::string &pseudo)
+void		Protocole::Welcome(Struct_Proto *t, const Server* srv)
 {
 	std::cout << "Welcome" << std::endl;
+	if (strcmp(t->Buffer, "salut") == 0)
+	{
+		Struct_Proto r;
+		r.audio = 0;
+		r.EnumId = SALUT;
+		strcpy(r.ip, t->ip);
+		strcpy(r.Buffer, "salut");
+		srv->socket->sendToSomeone(&r, r.ip, CLIENT_PORT);
+	}
 }
 
-void		Protocole::Contact_List(const std::string &pseudo)
+void		Protocole::Contact_List(Struct_Proto *t, const Server* srv)
 {
 	std::cout << "Contact_List" << std::endl;
 }
 
-void		Protocole::Contact_Add(const std::string &pseudo)
+void		Protocole::Contact_Add(Struct_Proto *t, const Server* srv)
 {
 	std::cout << "Contact_Add" << std::endl;
 }
 
-void		Protocole::Contact_Remove(const std::string &pseudo)
+void		Protocole::Contact_Remove(Struct_Proto *t, const Server* srv)
 {
 	std::cout << "Contact_Remove" << std::endl;
 }
 
-void		Protocole::Contact_Call_Me(const std::string &pseudo)
+void		Protocole::Contact_Call_Me(Struct_Proto *t, const Server* srv)
 {
 	std::cout << "Contact_Call_Me" << std::endl;
 }
 
-void		Protocole::Contact_To_Call(const std::string &pseudo)
+void		Protocole::Contact_To_Call(Struct_Proto *t, const Server* srv)
 {
 	std::cout << "Contact_To_Call" << std::endl;
 }
 
-void		Protocole::Authentification(const std::string &pseudo)
+void		Protocole::Authentification(Struct_Proto *t, const Server* srv)
 {
 	std::cout << "Auth" << std::endl;
 }
 
-void		Protocole::Protocole_to_call(const int id, const std::string &str)
+void		Protocole::Protocole_to_call(Struct_Proto *t, Server* srv)
 {
-  std::cout << id << std::endl;
+	int id = t->EnumId;
   if (id - 1 > 6)
     Logger::Instance()->log(2, "Protocole: Unknow enum\n");
   else
-	(*this.*func_tab[id - 1])(str);
+	(*this.*func_tab[id - 1])(t, srv);
 }
