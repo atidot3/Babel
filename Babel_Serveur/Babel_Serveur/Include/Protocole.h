@@ -14,6 +14,7 @@ struct				Proto_Struct
 	char			Buffer[512];
 	int				audio;
 	char			ip[100];
+	char			myPseudo[512];
 };
 
 typedef				Proto_Struct Struct_Proto;

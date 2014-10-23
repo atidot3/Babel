@@ -38,11 +38,65 @@ void		Protocole::Contact_List(Struct_Proto *t, Server* srv)
 void		Protocole::Contact_Add(Struct_Proto *t, Server* srv)
 {
 	std::cout << "Contact_Add" << std::endl;
+	if ((srv->FindUser(t->myPseudo)) == true)
+	{
+		Client* tmp = srv->GetUserSession(t->myPseudo);
+		if (tmp)
+		{
+			if (t->Buffer != NULL)
+				if ((tmp->addContact(t->Buffer)) == true)
+				{
+					Struct_Proto r;
+					r.audio = 0;
+					r.EnumId = CONTACT_ADD;
+					strcpy_s(r.ip, t->ip);
+					strcpy_s(r.Buffer, "ok");
+					srv->socket->sendToSomeone(&r, r.ip, CLIENT_PORT);
+				}
+				else
+				{
+					Logger::Instance()->log(2, "Protocole: Contact_Add error adding contact\n");
+					Struct_Proto r;
+					r.audio = 0;
+					r.EnumId = CONTACT_ADD;
+					strcpy_s(r.ip, t->ip);
+					strcpy_s(r.Buffer, "bad");
+					srv->socket->sendToSomeone(&r, r.ip, CLIENT_PORT);
+				}
+		}
+	}
 }
 
 void		Protocole::Contact_Remove(Struct_Proto *t, Server* srv)
 {
 	std::cout << "Contact_Remove" << std::endl;
+	if ((srv->FindUser(t->myPseudo)) == true)
+	{
+		Client* tmp = srv->GetUserSession(t->myPseudo);
+		if (tmp)
+		{
+			if (t->Buffer != NULL)
+				if ((tmp->removeContact(t->Buffer)) == true)
+				{
+					Struct_Proto r;
+					r.audio = 0;
+					r.EnumId = CONTACT_REMOVE;
+					strcpy_s(r.ip, t->ip);
+					strcpy_s(r.Buffer, "ok");
+					srv->socket->sendToSomeone(&r, r.ip, CLIENT_PORT);
+				}
+				else
+				{
+					Logger::Instance()->log(2, "Protocole: Contact_Remove error removing contact\n");
+					Struct_Proto r;
+					r.audio = 0;
+					r.EnumId = CONTACT_REMOVE;
+					strcpy_s(r.ip, t->ip);
+					strcpy_s(r.Buffer, "bad");
+					srv->socket->sendToSomeone(&r, r.ip, CLIENT_PORT);
+				}
+		}
+	}
 }
 
 void		Protocole::Contact_Call_Me(Struct_Proto *t, Server* srv)
@@ -61,16 +115,25 @@ void		Protocole::Authentification(Struct_Proto *t, Server* srv)
 	if (t->Buffer != NULL)
 	{
 		Client* newOne = new Client(t->Buffer);
-		if ((srv->AddUser(t->Buffer, newOne)) == false)
+		if ((srv->AddUser(t->Buffer, newOne)) == true)
+		{
+			Struct_Proto r;
+			r.audio = 0;
+			r.EnumId = AUTH;
+			strcpy_s(r.ip, t->ip);
+			strcpy_s(r.Buffer, "ok");
+			srv->socket->sendToSomeone(&r, r.ip, CLIENT_PORT);
+		}
+		else
 		{
 			Logger::Instance()->log(2, "Protocole: Authentification error adding new client\n");
+			Struct_Proto r;
+			r.audio = 0;
+			r.EnumId = AUTH;
+			strcpy_s(r.ip, t->ip);
+			strcpy_s(r.Buffer, "bad");
+			srv->socket->sendToSomeone(&r, r.ip, CLIENT_PORT);
 		}
-		Struct_Proto r;
-		r.audio = 0;
-		r.EnumId = AUTH;
-		strcpy_s(r.ip, t->ip);
-		strcpy_s(r.Buffer, t->Buffer);
-		srv->socket->sendToSomeone(&r, r.ip, CLIENT_PORT);
 	}
 }
 
