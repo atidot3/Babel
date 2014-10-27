@@ -2,6 +2,8 @@
 #define APPLICATION_H
 
 #include <QWidget>
+#include "comclient.h"
+#include "comserver.h"
 
 namespace Ui {
 class Application;
@@ -15,6 +17,10 @@ public:
     explicit Application(QWidget *parent = 0);
     ~Application();
     bool    isCalling;
+    void    setPseudo(QString);
+    void    setIpAddress(QString);
+    QString    getPseudo();
+    QString    getIpAddress();
 
 private slots:
 
@@ -30,6 +36,10 @@ private slots:
 
 private:
     Ui::Application *ui;
+    QString     ipAddress;
+    QString     pseudo;
+    ComClient   *client;
+    ComServer   *server;
 };
 
 #endif // APPLICATION_H

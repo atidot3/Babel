@@ -16,7 +16,22 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
-    newApplication = new Application(); // Be sure to destroy you window somewhere
-    newApplication->show();
-    this->close();
+    QString ipAddress;
+    QString pseudo;
+
+    ipAddress = ui->tvIpServer->text();
+    pseudo = ui->tvPseudo->text();
+    if (ipAddress != NULL && pseudo != NULL)
+    {
+        if (pseudo != "")
+        {
+            if (ipAddress == "")
+                newApplication->setIpAddress("127.0.0.1");
+            newApplication = new Application();
+            newApplication->setIpAddress(ipAddress);
+            newApplication->setPseudo(pseudo);
+            newApplication->show();
+            this->close();
+        }
+    }
 }
