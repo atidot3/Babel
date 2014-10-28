@@ -34,12 +34,26 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>50</y>
+      <y>31</y>
       <width>261</width>
-      <height>72</height>
+      <height>121</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>IP Server</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="tvIpServer">
+       <property name="text">
+        <string>127.0.0.1</string>
+       </property>
+      </widget>
+     </item>
      <item>
       <widget class="QLabel" name="label">
        <property name="text">
@@ -48,7 +62,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit"/>
+      <widget class="QLineEdit" name="tvPseudo"/>
      </item>
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout">

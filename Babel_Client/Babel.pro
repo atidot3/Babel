@@ -8,10 +8,16 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
     mainwindow.cpp \
-    application.cpp
+    application.cpp \
+    comclient.cpp \
+    comserver.cpp
 
 HEADERS  += mainwindow.h \
-    application.h
+    application.h \
+    ISound.h \
+    comclient.h \
+    comserver.h \
+    ICommunicate.h
 
 FORMS    += mainwindow.ui \
     application.ui
@@ -19,4 +25,4 @@ FORMS    += mainwindow.ui \
 RESOURCES += \
     Assets.qrc
 
-LIBS += -L$$PWD/lib -lportaudio -lopus
+#LIBS += -L$$PWD/lib -lportaudio -lopus

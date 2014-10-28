@@ -10,6 +10,7 @@ Application::Application(QWidget *parent) :
     ui->setupUi(this);
     isCalling = false;
     //ui->contactList->clear();
+    this->server = new ComServer(this->ipAddress);
 }
 
 Application::~Application()
@@ -57,4 +58,24 @@ void Application::on_contactList_clicked(const QModelIndex &index)
         ui->btCall->setEnabled(true);
         ui->btHang->setEnabled(false);
     }
+}
+
+void Application::setIpAddress(QString ip)
+{
+    this->ipAddress = ip;
+}
+
+void Application::setPseudo(QString pseudo)
+{
+    this->pseudo = pseudo;
+}
+
+QString Application::getIpAddress()
+{
+    return (this->ipAddress);
+}
+
+QString Application::getPseudo()
+{
+    return (this->pseudo);
 }

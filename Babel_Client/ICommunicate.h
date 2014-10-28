@@ -1,0 +1,4 @@
+#ifndef ICOMMUNICATE_H
+#define ICOMMUNICATE_H
+
+#endif // ICOMMUNICATE_H
