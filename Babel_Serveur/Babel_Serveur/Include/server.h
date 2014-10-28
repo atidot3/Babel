@@ -20,18 +20,18 @@ public:
 	~Server();
 	void		run();
 	void		stop();
-private:
-	Protocole	*proto;
-	bool		running;
 	ISocket		*socket;
-	typedef std::map<string, Client*> USERLIST;
-	typedef USERLIST::value_type USERVAL;
-	typedef USERLIST::iterator USERIT;
-	USERLIST	m_userList;
 	bool	AddUser(const char* UserID, Client* newUser);
 	void	RemoveUser(const char* UserID);
 	bool	FindUser(const char* UserID);
 	Client*	GetUserSession(const char* UserID);
+private:
+	typedef std::map<string, Client*> USERLIST;
+	typedef USERLIST::value_type USERVAL;
+	typedef USERLIST::iterator USERIT;
+	USERLIST	m_userList;
+	Protocole	*proto;
+	bool		running;
 };
 
 #endif

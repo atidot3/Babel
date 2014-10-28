@@ -19,6 +19,8 @@ public:
     void connect();
     ISocket* accept();
     void send(const std::string&, std::string ip = "", int port = 0);
+	void	sendToSomeone(Struct_Proto* stru, std::string ip, int port);
+	void	recvFromSomeone(std::string ip, int port, Struct_Proto *t);
 	std::string recv(int, std::string* ip = NULL);
 
 private:

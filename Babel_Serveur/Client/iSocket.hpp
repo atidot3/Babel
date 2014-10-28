@@ -3,9 +3,10 @@
 
 #include "socketException.hpp"
 
+
 #define SERVER_PORT 4242
 #define CLIENT_PORT 4243
-
+typedef	struct Proto_Struct Struct_Proto;
 class ISocket
 {
 public:
@@ -14,6 +15,8 @@ public:
 	virtual void connect() = 0;
 	virtual ISocket* accept() = 0;
 	virtual void send(const std::string&, std::string ip = "", int port = 0) = 0;
+	virtual void	sendToSomeone(Struct_Proto* stru, std::string ip, int port) = 0;
+	virtual	void	recvFromSomeone(std::string ip, int port, Struct_Proto *t)=0;
 	virtual std::string recv(int, std::string* ip = NULL) = 0;
 
 private:

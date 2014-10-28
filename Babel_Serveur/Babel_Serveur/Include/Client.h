@@ -29,13 +29,13 @@ public:
 	Client(const std::string &Username);
 	~Client();
 	CONTACTLIST	getContact();
-private:
 	bool				addContact(const std::string &);
 	bool				removeContact(const std::string &);
-	std::string			IsAskingConnection();
-	ISocket*			acceptConnection(const std::string &);
 	bool				isBusy();
 	bool				isCalled();
+private:
+	std::string			IsAskingConnection();
+	ISocket*			acceptConnection(const std::string &);
 };
 
 #endif

@@ -53,22 +53,10 @@ void		Server::run()
 		running = true;
 		while (running == true)
 		{
-			buff = socket->recv(100, &ip);
-			cout << "Buff received" << ip << endl;
-			if ((this->FindUser(ip.c_str())) == true)
-			{
-				cout << "client already connected, exiting..." << ip << endl;
-				Logger::Instance()->log(1, "client already connected:" + ip + ", exiting...\n");
-				buff = "";
-		    }
-			socket->send("salut", ip, CLIENT_PORT);
-		    if (buff == WELCOME)
-		    {
-				Logger::Instance()->log(0, "Client connected: " + ip + ".\n");
-				cout << "New client " << ip.c_str() << endl;
-				Client* NewOne = new Client(ip.c_str());
-				this->AddUser(ip.c_str(), NewOne);
-			}
+			Struct_Proto* t = new Struct_Proto();
+			socket->recvFromSomeone(ip, 100, t);
+			proto->Protocole_to_call(t, this);
+			delete t;
 		}
 	}
 	catch (std::exception *e)
