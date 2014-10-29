@@ -4,7 +4,7 @@ CXXFLAGS        =       -W -Wall -Wextra -pthread -L$$PWD/lib -lportaudio -lopus
 
 RM      =       rm -f
 
-INCLUDE =       ./inc/AudioHandler.h
+INCLUDE =       ./inc/
 
 DIR     =       ./src/
 
