@@ -1,3 +1,6 @@
+#ifndef AUDIOHANDLER_H_
+#define AUDIOHANDLER_H_
+
 #include "portaudio.h"
 
 #include <iostream>
@@ -29,3 +32,5 @@ protected:
 	PaStreamParameters		_outputChannel;
 	unsigned char			*_readBuffer;
 };
+
+#endif
