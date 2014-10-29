@@ -4,18 +4,22 @@ CXXFLAGS        =       -W -Wall -Wextra -pthread -L$$PWD/lib -lportaudio -lopus
 
 RM      =       rm -f
 
-INCLUDE =       ./inc/
+INCLUDE =       inc/
 
-DIR     =       ./src/
+OBJ_DIR =	obj/
+
+DIR     =       src/
 
 NAME    =       audioTest
 
 SRC     =       $(DIR)mainAudio.cpp \
                 $(DIR)AudioHandler.cpp
 
-OBJ     :=      $(SRC:$(DIR)%.cpp=$(DIR)%.o)
-
 all: $(NAME)
+
+$(OBJ_DIR)%.o:	$(DIR)%.cpp
+			@mkdir -p $(OBJ_DIR)
+			$(CC) -c -o $@ $< -I $(INCLUDE) $(CXXFLAGS)
 
 $(NAME): $(OBJ)
 		@$(CC) $(CXXFLAGS) -I $(INCLUDE) -o $(NAME) $(OBJ)
