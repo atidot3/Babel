@@ -2,11 +2,11 @@
 
 int 	main()
 {
-	AudioHandler audio();
+	AudioHandler audio;
 
 	audio.initializePa();
 	audio.initStream();
 	audio.initChannels();
-	audio.writeStream();
+	audio.writeStream(audio.getReadBuffer());
 	return (0);
 }
