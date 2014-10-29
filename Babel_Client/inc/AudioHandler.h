@@ -1,7 +1,7 @@
 #ifndef AUDIOHANDLER_H_
 #define AUDIOHANDLER_H_
 
-#include "portaudio.h"
+#include "../portaudio/include/portaudio.h"
 
 #include <iostream>
 #include <string>
@@ -11,6 +11,7 @@
 #define FRAMES_PER_BUFFER (1024)
 #define SAMPLE_TYPE paInt24
 #define NUM_CHANNELS    (2)
+#define SAMPLE_SIZE (3)
 
 class AudioHandler
 {
@@ -23,6 +24,12 @@ public:
 	bool 	stopStream();
 	bool	closeStream();
 	bool	initChannels();
+	bool 	terminatePa();
+	bool	writeStream(unsigned char *);
+	bool	readStream();
+	void 	cleanReadBuffer();
+	int 	getReadBufferSize() const;
+	unsigned char 	*getReadBuffer() const;
 
 protected:
 	PaStream  				*_stream;

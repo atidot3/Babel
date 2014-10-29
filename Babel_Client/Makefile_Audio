@@ -1,6 +1,6 @@
 CC      =       g++
 
-CXXFLAGS        =       -W -Wall -Wextra -L$$PWD/lib -lportaudio -lopus
+CXXFLAGS        =       -L$$PWD/lib -lportaudio -lopus
 
 RM      =       rm -f
 

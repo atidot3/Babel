@@ -57,21 +57,21 @@ bool 	AudioHandler::terminatePa()
 
 bool 	AudioHandler::initChannels()
 {
-	if ((initPa()) == false)
+	if ((initializePa()) == false)
 		std::cerr << "Unable to initialize PortAudio" << std::endl;
 	if ((_inputChannel.device = Pa_GetDefaultInputDevice()) != paNoDevice)
 	{
 		_inputChannel.channelCount = 2;
 		_inputChannel.hostApiSpecificStreamInfo = NULL;
 		_inputChannel.sampleFormat = SAMPLE_TYPE;
-		_inputChannel.suggestedLatency = Pa_GetDeviceInfo(_inputParam.device)->defaultLowInputLatency;
+		_inputChannel.suggestedLatency = Pa_GetDeviceInfo(_inputChannel.device)->defaultLowInputLatency;
 	}
-	if ((_outputParam.device = Pa_GetDefaultInputDevice()) != paNoDevice)
+	if ((_outputChannel.device = Pa_GetDefaultInputDevice()) != paNoDevice)
 	{
-		_outputParam.channelCount = 2;
-		_outputParam.hostApiSpecificStreamInfo = NULL;
-		_outputParam.sampleFormat = SAMPLE_TYPE;
-		_outputParam.suggestedLatency = Pa_GetDeviceInfo(_outputParam.device)->defaultLowInputLatency;
+		_outputChannel.channelCount = 2;
+		_outputChannel.hostApiSpecificStreamInfo = NULL;
+		_outputChannel.sampleFormat = SAMPLE_TYPE;
+		_outputChannel.suggestedLatency = Pa_GetDeviceInfo(_outputChannel.device)->defaultLowInputLatency;
 	}
 	return (true);
 }
