@@ -1,6 +1,6 @@
 CC      =       g++
 
-CXXFLAGS        =       -L$$PWD/lib -lportaudio
+CXXFLAGS        =       -L$$PWD/lib -lportaudio -lrt -lasound -lpthread
 
 RM      =       rm -f
 
