@@ -2,5 +2,5 @@
 
 ComServer::ComServer(QString ipAddress)
 {
-
+    
 }

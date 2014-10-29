@@ -33,6 +33,12 @@ public:
     QVBoxLayout *verticalLayout;
     QLabel *label_2;
     QLineEdit *tvIpServer;
+    QHBoxLayout *horizontalLayout_3;
+    QLabel *label_4;
+    QLabel *label_3;
+    QHBoxLayout *horizontalLayout_2;
+    QLineEdit *tvSendPort;
+    QLineEdit *tvGetPort;
     QLabel *label;
     QLineEdit *tvPseudo;
     QHBoxLayout *horizontalLayout;
@@ -44,9 +50,9 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(279, 181);
-        MainWindow->setMinimumSize(QSize(279, 181));
-        MainWindow->setMaximumSize(QSize(279, 181));
+        MainWindow->resize(279, 200);
+        MainWindow->setMinimumSize(QSize(279, 200));
+        MainWindow->setMaximumSize(QSize(279, 200));
         QIcon icon;
         icon.addFile(QStringLiteral(":/logo.png"), QSize(), QIcon::Normal, QIcon::Off);
         MainWindow->setWindowIcon(icon);
@@ -54,7 +60,7 @@ public:
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         verticalLayoutWidget = new QWidget(centralWidget);
         verticalLayoutWidget->setObjectName(QStringLiteral("verticalLayoutWidget"));
-        verticalLayoutWidget->setGeometry(QRect(10, 31, 261, 121));
+        verticalLayoutWidget->setGeometry(QRect(10, 10, 261, 174));
         verticalLayout = new QVBoxLayout(verticalLayoutWidget);
         verticalLayout->setSpacing(6);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
@@ -69,6 +75,41 @@ public:
         tvIpServer->setObjectName(QStringLiteral("tvIpServer"));
 
         verticalLayout->addWidget(tvIpServer);
+
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setSpacing(6);
+        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
+        label_4 = new QLabel(verticalLayoutWidget);
+        label_4->setObjectName(QStringLiteral("label_4"));
+
+        horizontalLayout_3->addWidget(label_4);
+
+        label_3 = new QLabel(verticalLayoutWidget);
+        label_3->setObjectName(QStringLiteral("label_3"));
+
+        horizontalLayout_3->addWidget(label_3);
+
+
+        verticalLayout->addLayout(horizontalLayout_3);
+
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setSpacing(6);
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
+        tvSendPort = new QLineEdit(verticalLayoutWidget);
+        tvSendPort->setObjectName(QStringLiteral("tvSendPort"));
+        tvSendPort->setMaxLength(6);
+
+        horizontalLayout_2->addWidget(tvSendPort);
+
+        tvGetPort = new QLineEdit(verticalLayoutWidget);
+        tvGetPort->setObjectName(QStringLiteral("tvGetPort"));
+        tvGetPort->setEnabled(true);
+        tvGetPort->setMaxLength(6);
+
+        horizontalLayout_2->addWidget(tvGetPort);
+
+
+        verticalLayout->addLayout(horizontalLayout_2);
 
         label = new QLabel(verticalLayoutWidget);
         label->setObjectName(QStringLiteral("label"));
@@ -111,6 +152,10 @@ public:
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Babel - Connection", 0));
         label_2->setText(QApplication::translate("MainWindow", "IP Server", 0));
         tvIpServer->setText(QApplication::translate("MainWindow", "127.0.0.1", 0));
+        label_4->setText(QApplication::translate("MainWindow", "Port \303\251mission :", 0));
+        label_3->setText(QApplication::translate("MainWindow", "Port r\303\251ception :", 0));
+        tvSendPort->setText(QApplication::translate("MainWindow", "8888", 0));
+        tvGetPort->setText(QApplication::translate("MainWindow", "6666", 0));
         label->setText(QApplication::translate("MainWindow", "Username :", 0));
         pushButton->setText(QApplication::translate("MainWindow", "Log In", 0));
     } // retranslateUi

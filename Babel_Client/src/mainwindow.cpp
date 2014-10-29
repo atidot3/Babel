@@ -7,6 +7,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->tvGetPort->text();
+    ComClient *client = new ComClient(6666, 8888, this);
 }
 
 MainWindow::~MainWindow()

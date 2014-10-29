@@ -12,13 +12,13 @@ MAKEFILE      = Makefile
 
 CC            = gcc
 CXX           = g++
-DEFINES       = -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
+DEFINES       = -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_NETWORK_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -march=x86-64 -mtune=generic -O2 -pipe -fstack-protector-strong --param=ssp-buffer-size=4 -Wall -W -D_REENTRANT -fPIE $(DEFINES)
 CXXFLAGS      = -pipe -march=x86-64 -mtune=generic -O2 -pipe -fstack-protector-strong --param=ssp-buffer-size=4 -Wall -W -D_REENTRANT -fPIE $(DEFINES)
-INCPATH       = -I/usr/lib/qt/mkspecs/linux-g++ -I. -Iinc -isystem /usr/include/qt -isystem /usr/include/qt/QtWidgets -isystem /usr/include/qt/QtGui -isystem /usr/include/qt/QtCore -Ibuild/debug/.moc -Ibuild/debug/.ui
+INCPATH       = -I/usr/lib/qt/mkspecs/linux-g++ -I. -Iinc -isystem /usr/include/qt -isystem /usr/include/qt/QtWidgets -isystem /usr/include/qt/QtNetwork -isystem /usr/include/qt/QtGui -isystem /usr/include/qt/QtCore -Ibuild/debug/.moc -Ibuild/debug/.ui
 LINK          = g++
 LFLAGS        = -Wl,-O1,--sort-common,--as-needed,-z,relro -Wl,-O1
-LIBS          = $(SUBLIBS) -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
+LIBS          = $(SUBLIBS) -L/home/maire_j/rendu/antidot3-Babel/Babel_Client/lib -lportaudio -lopus -lQt5Widgets -lQt5Network -lQt5Gui -lQt5Core -lGL -lpthread 
 AR            = ar cqs
 RANLIB        = 
 QMAKE         = /usr/lib/qt/bin/qmake
@@ -281,6 +281,7 @@ Makefile: Babel.pro /usr/lib/qt/mkspecs/linux-g++/qmake.conf /usr/lib/qt/mkspecs
 		Babel.pro \
 		rsc/Assets.qrc \
 		/usr/lib/libQt5Widgets.prl \
+		/usr/lib/libQt5Network.prl \
 		/usr/lib/libQt5Gui.prl \
 		/usr/lib/libQt5Core.prl
 	$(QMAKE) -o Makefile Babel.pro
@@ -377,6 +378,7 @@ Makefile: Babel.pro /usr/lib/qt/mkspecs/linux-g++/qmake.conf /usr/lib/qt/mkspecs
 Babel.pro:
 rsc/Assets.qrc:
 /usr/lib/libQt5Widgets.prl:
+/usr/lib/libQt5Network.prl:
 /usr/lib/libQt5Gui.prl:
 /usr/lib/libQt5Core.prl:
 qmake: FORCE
@@ -423,12 +425,12 @@ build/debug/.moc/moc_mainwindow.cpp: inc/application.h \
 		inc/comclient.h \
 		inc/comserver.h \
 		inc/mainwindow.h
-	/usr/lib/qt/bin/moc $(DEFINES) -I/usr/lib/qt/mkspecs/linux-g++ -I/home/maire_j/rendu/antidot3-Babel/Babel_Client -I/home/maire_j/rendu/antidot3-Babel/Babel_Client/inc -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/4.9.1 -I/usr/include/c++/4.9.1/x86_64-unknown-linux-gnu -I/usr/include/c++/4.9.1/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/include-fixed -I/usr/include inc/mainwindow.h -o build/debug/.moc/moc_mainwindow.cpp
+	/usr/lib/qt/bin/moc $(DEFINES) -I/usr/lib/qt/mkspecs/linux-g++ -I/home/maire_j/rendu/antidot3-Babel/Babel_Client -I/home/maire_j/rendu/antidot3-Babel/Babel_Client/inc -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/4.9.1 -I/usr/include/c++/4.9.1/x86_64-unknown-linux-gnu -I/usr/include/c++/4.9.1/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/include-fixed -I/usr/include inc/mainwindow.h -o build/debug/.moc/moc_mainwindow.cpp
 
 build/debug/.moc/moc_application.cpp: inc/comclient.h \
 		inc/comserver.h \
 		inc/application.h
-	/usr/lib/qt/bin/moc $(DEFINES) -I/usr/lib/qt/mkspecs/linux-g++ -I/home/maire_j/rendu/antidot3-Babel/Babel_Client -I/home/maire_j/rendu/antidot3-Babel/Babel_Client/inc -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/4.9.1 -I/usr/include/c++/4.9.1/x86_64-unknown-linux-gnu -I/usr/include/c++/4.9.1/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/include-fixed -I/usr/include inc/application.h -o build/debug/.moc/moc_application.cpp
+	/usr/lib/qt/bin/moc $(DEFINES) -I/usr/lib/qt/mkspecs/linux-g++ -I/home/maire_j/rendu/antidot3-Babel/Babel_Client -I/home/maire_j/rendu/antidot3-Babel/Babel_Client/inc -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/4.9.1 -I/usr/include/c++/4.9.1/x86_64-unknown-linux-gnu -I/usr/include/c++/4.9.1/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/include-fixed -I/usr/include inc/application.h -o build/debug/.moc/moc_application.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:

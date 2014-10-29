@@ -2,12 +2,12 @@
 #define COMSERVER_H
 
 #include <QString>
-
+#include <QTcpSocket>
 
 class ComServer
 {
 private:
-    //QTcpSocket *socket;
+    QTcpSocket *tcpSocket;
 public:
     ComServer(QString);
 };

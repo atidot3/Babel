@@ -8,4 +8,5 @@ int 	main()
 	audio.initStream();
 	audio.initChannels();
 	audio.writeStream();
+	return (0);
 }

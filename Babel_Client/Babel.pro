@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -30,7 +30,7 @@ FORMS    += $$UI/mainwindow.ui \
 RESOURCES += \
     $$RSC/Assets.qrc
 
-#LIBS += -L$$PWD/lib -lportaudio -lopus
+LIBS += -L$$PWD/lib -lportaudio -lopus
 
 release: DESTDIR = build/release
 debug:   DESTDIR = build/debug

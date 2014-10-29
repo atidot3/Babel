@@ -8,6 +8,8 @@ INCLUDE =       inc/
 
 OBJ_DIR =	obj/
 
+OBJ	=	$(patsubst $(SRC)%.cpp, $(OBJ_DIR)%.o, $(SRC))
+
 DIR     =       src/
 
 NAME    =       audioTest
