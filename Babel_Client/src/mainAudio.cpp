@@ -1,4 +1,4 @@
-#include "./inc/AudioHandler.h"
+#include "AudioHandler.h"
 
 int 	main()
 {
