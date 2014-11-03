@@ -1,4 +1,4 @@
-#include "Include/socketUnix.hpp"
+#include "Include/socketUnix.h"
 
 
 SocketUnix::SocketUnix(const std::string ip, int port, const std::string mode) : hSocket(0)
@@ -79,6 +79,24 @@ void	SocketUnix::send(const std::string& buf, std::string ip, int port)
       if (::send(this->hSocket, buf.c_str(), buf.size(), 0) == -1)
 	throw new SocketException("Could not write to socket.");
     }
+}
+
+void		SocketUnix::sendToSomeone(Struct_Proto* stru, std::string ip, int port)
+{
+
+  struct sockaddr_in toSin;
+    toSin.sin_addr.s_addr = inet_addr(ip.c_str());
+    toSin.sin_family = AF_INET;
+    toSin.sin_port	= htons(port);
+	if (::sendto(this->hSocket, (char*)stru, sizeof(Struct_Proto), 0, (struct sockaddr *)&toSin, sizeof(toSin)) == -1)
+		throw new SocketException("Could not write to adress.");
+}
+void		SocketUnix::recvFromSomeone(std::string ip, int port, Struct_Proto *t)
+{
+    struct sockaddr_in fromSin;
+    unsigned int fromLen = sizeof(fromSin);
+	if ((::recvfrom(this->hSocket, (char*)t, sizeof(Struct_Proto), 0, (struct sockaddr *)&fromSin, &fromLen)) == -1)
+		throw new SocketException("Could not read on UDP socket.");
 }
 
 std::string SocketUnix::recv(int len, std::string* ip)

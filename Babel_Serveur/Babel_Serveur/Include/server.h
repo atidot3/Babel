@@ -5,10 +5,10 @@
 #include <string>
 #include <iostream>
 #include <map>
-#include "Include\log.h"
-#include "Include\Protocole.h"
-#include "Include\iSocket.h"
-#include "Include\Client.h"
+#include "Include/log.h"
+#include "Include/Protocole.h"
+#include "Include/iSocket.h"
+#include "Include/Client.h"
 
 #define WELCOME "salut"
 using namespace std;

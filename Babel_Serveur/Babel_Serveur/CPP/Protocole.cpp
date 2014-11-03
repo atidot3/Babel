@@ -1,5 +1,6 @@
+#include	<cstring>
 #include	"Include/Protocole.h"
-#include	"Include\server.h"
+#include	"Include/server.h"
 
 Protocole::Protocole()
 {
@@ -24,8 +25,8 @@ void		Protocole::Welcome(Struct_Proto *t, Server* srv)
 		Struct_Proto r;
 		r.audio = 0;
 		r.EnumId = SALUT;
-		strcpy_s(r.ip, t->ip);
-		strcpy_s(r.Buffer, "salut");
+		strcpy(r.ip, t->ip);
+		strcpy(r.Buffer, "salut");
 		srv->socket->sendToSomeone(&r, r.ip, CLIENT_PORT);
 	}
 }
@@ -49,8 +50,8 @@ void		Protocole::Contact_Add(Struct_Proto *t, Server* srv)
 					Struct_Proto r;
 					r.audio = 0;
 					r.EnumId = CONTACT_ADD;
-					strcpy_s(r.ip, t->ip);
-					strcpy_s(r.Buffer, "ok");
+					strcpy(r.ip, t->ip);
+					strcpy(r.Buffer, "ok");
 					srv->socket->sendToSomeone(&r, r.ip, CLIENT_PORT);
 				}
 				else
@@ -59,8 +60,8 @@ void		Protocole::Contact_Add(Struct_Proto *t, Server* srv)
 					Struct_Proto r;
 					r.audio = 0;
 					r.EnumId = CONTACT_ADD;
-					strcpy_s(r.ip, t->ip);
-					strcpy_s(r.Buffer, "bad");
+					strcpy(r.ip, t->ip);
+					strcpy(r.Buffer, "bad");
 					srv->socket->sendToSomeone(&r, r.ip, CLIENT_PORT);
 				}
 		}
@@ -81,8 +82,8 @@ void		Protocole::Contact_Remove(Struct_Proto *t, Server* srv)
 					Struct_Proto r;
 					r.audio = 0;
 					r.EnumId = CONTACT_REMOVE;
-					strcpy_s(r.ip, t->ip);
-					strcpy_s(r.Buffer, "ok");
+					strcpy(r.ip, t->ip);
+					strcpy(r.Buffer, "ok");
 					srv->socket->sendToSomeone(&r, r.ip, CLIENT_PORT);
 				}
 				else
@@ -91,8 +92,8 @@ void		Protocole::Contact_Remove(Struct_Proto *t, Server* srv)
 					Struct_Proto r;
 					r.audio = 0;
 					r.EnumId = CONTACT_REMOVE;
-					strcpy_s(r.ip, t->ip);
-					strcpy_s(r.Buffer, "bad");
+					strcpy(r.ip, t->ip);
+					strcpy(r.Buffer, "bad");
 					srv->socket->sendToSomeone(&r, r.ip, CLIENT_PORT);
 				}
 		}
@@ -120,8 +121,8 @@ void		Protocole::Authentification(Struct_Proto *t, Server* srv)
 			Struct_Proto r;
 			r.audio = 0;
 			r.EnumId = AUTH;
-			strcpy_s(r.ip, t->ip);
-			strcpy_s(r.Buffer, "ok");
+			strcpy(r.ip, t->ip);
+			strcpy(r.Buffer, "ok");
 			srv->socket->sendToSomeone(&r, r.ip, CLIENT_PORT);
 		}
 		else
@@ -130,8 +131,8 @@ void		Protocole::Authentification(Struct_Proto *t, Server* srv)
 			Struct_Proto r;
 			r.audio = 0;
 			r.EnumId = AUTH;
-			strcpy_s(r.ip, t->ip);
-			strcpy_s(r.Buffer, "bad");
+			strcpy(r.ip, t->ip);
+			strcpy(r.Buffer, "bad");
 			srv->socket->sendToSomeone(&r, r.ip, CLIENT_PORT);
 		}
 	}

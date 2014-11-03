@@ -2,10 +2,10 @@
 //
 
 #include <iostream>
-#include "Include\server.h"
+#include "Include/server.h"
 #include <stdlib.h>
 #include <vector>
-#include "Include\log.h"
+#include "Include/log.h"
 
 using namespace std;
 

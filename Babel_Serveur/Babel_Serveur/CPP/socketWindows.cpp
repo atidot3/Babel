@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "Include\socketWindows.h"
+#include "Include/socketWindows.h"
 
 SocketWindows::SocketWindows(const std::string ip, int port, const std::string mode) : hSocket(0)
 {

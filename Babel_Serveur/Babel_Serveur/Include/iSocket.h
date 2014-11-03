@@ -1,8 +1,9 @@
 #ifndef ISOCKET
 # define ISOCKET
 
-#include "Include\socketException.h"
-#include "Include\log.h"
+#include "Include/Protocole.h"
+#include "Include/socketException.h"
+#include "Include/log.h"
 
 #define SERVER_PORT 4242
 #define CLIENT_PORT 4243
@@ -47,7 +48,7 @@ public:
 #else
     #include <sys/types.h>
     #include <sys/socket.h>
-    #include "sockets/socketUnix.hpp"
+    #include "Include/socketUnix.h"
 #endif
 
 #endif //ISOCKET
