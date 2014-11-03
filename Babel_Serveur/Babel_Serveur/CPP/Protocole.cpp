@@ -11,6 +11,8 @@ Protocole::Protocole()
   func_tab[4] = &Protocole::Contact_Remove;
   func_tab[5] = &Protocole::Contact_Call_Me;
   func_tab[6] = &Protocole::Contact_To_Call;
+  func_tab[7] = &Protocole::Send_Audio;
+  func_tab[8] = &Protocole::Disconnect;
 }
 
 Protocole::~Protocole()
@@ -137,11 +139,26 @@ void		Protocole::Authentification(Struct_Proto *t, Server* srv)
 		}
 	}
 }
-
+void		Protocole::Send_Audio(Struct_Proto *t, Server* srv)
+{
+	std::cout << "send audio" << std::endl;
+}
+void		Protocole::Disconnect(Struct_Proto *t, Server* srv)
+{
+	std::cout << "Client " << t->myPseudo << " had requested disconnection" << std::endl;
+	if ((srv->RemoveUser(t->Buffer)) == true)
+	{
+		Logger::Instance()->log(2, "Protocole: Disconnect error removing client\n");
+	}
+	else
+	{
+		std::cout << "Client " << (string)t->myPseudo << " disconnected" << std::endl;
+	}
+}
 void		Protocole::Protocole_to_call(Struct_Proto *t, Server* srv)
 {
 	int id = t->EnumId;
-  if (id - 1 > 6)
+  if (id - 1 > 9)
     Logger::Instance()->log(2, "Protocole: Unknow enum\n");
   else
 	(*this.*func_tab[id - 1])(t, srv);

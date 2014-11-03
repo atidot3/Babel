@@ -19,15 +19,17 @@ void		Server::stop()
 }
 bool		Server::AddUser(const char* UserID, Client* newUser)
 {
-	if( false == m_userList.insert( USERVAL(string(UserID), newUser)).second )
-	{
-		return false;
-	}
-	return true;		
+	return m_userList.insert( USERVAL(string(UserID), newUser)).second;
 }
-void		Server::RemoveUser(const char* UserID)
+bool		Server::RemoveUser(const char* UserID)
 {
+	Client* rmv = GetUserSession(UserID);
+	if (rmv != NULL)
+	{
+		delete rmv;
+	}
 	m_userList.erase( string(UserID) );
+	return this->FindUser(UserID);
 }
 bool		Server::FindUser(const char* UserID)
 {

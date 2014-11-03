@@ -22,7 +22,7 @@ public:
 	void		stop();
 	ISocket		*socket;
 	bool	AddUser(const char* UserID, Client* newUser);
-	void	RemoveUser(const char* UserID);
+	bool	RemoveUser(const char* UserID);
 	bool	FindUser(const char* UserID);
 	Client*	GetUserSession(const char* UserID);
 private:

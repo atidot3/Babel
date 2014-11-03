@@ -28,15 +28,17 @@ class				Protocole
   {
     PROTOCOLE_BEGIN = 0,
     SALUT,
-    AUTH,
+	AUTH,
     CONTACT_LIST,
     CONTACT_ADD,
     CONTACT_REMOVE,
     CONTACT_CALL_ME,
     CONTACT_TO_CALL,
+	SEND_AUDIO,
+	DISCONNECT,
     PROTOCOLE_END
   };
-  ptr			func_tab[7];
+  ptr			func_tab[9];
  public:
   Protocole();
   ~Protocole();
@@ -49,6 +51,8 @@ class				Protocole
   void			Contact_Call_Me(Struct_Proto *t, Server*);
   void			Contact_To_Call(Struct_Proto *t, Server*);
   void			Authentification(Struct_Proto *t, Server*);
+  void			Send_Audio(Struct_Proto *t, Server*);
+  void			Disconnect(Struct_Proto *t, Server*);
 };
 
 #endif // PROTOCOLE

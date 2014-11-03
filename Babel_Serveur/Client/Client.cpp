@@ -78,6 +78,35 @@ void		Client::run()
 			memset(&t, 0, sizeof(t));
 			socket->recvFromSomeone(ip, SERVER_PORT, &t);
 			cout << "Removing client " << t.Buffer << endl;
+			memset(&t, 0, sizeof(t));
+			t.audio = 1;
+			strcpy_s(t.ip,"127.0.0.1");
+			strcpy_s(t.Buffer, "Atidote");
+			t.EnumId = 2;
+			socket->sendToSomeone(&t, "127.0.0.1", SERVER_PORT);
+			socket->recvFromSomeone(ip, SERVER_PORT, &t);
+			memset(&t, 0, sizeof(t));
+			t.audio = 1;
+			strcpy_s(t.ip,"127.0.0.1");
+			strcpy_s(t.Buffer, "Atidote");
+			t.EnumId = 9;
+			socket->sendToSomeone(&t, "127.0.0.1", SERVER_PORT);
+			cout << "Disconnect" << endl;
+			memset(&t, 0, sizeof(t));
+			t.audio = 1;
+			strcpy_s(t.ip,"127.0.0.1");
+			strcpy_s(t.Buffer, "salut");
+			t.EnumId = 1;
+			socket->sendToSomeone(&t, "127.0.0.1", SERVER_PORT);
+			socket->recvFromSomeone(ip, SERVER_PORT, &t);
+			memset(&t, 0, sizeof(t));
+			t.audio = 1;
+			strcpy_s(t.ip,"127.0.0.1");
+			strcpy_s(t.Buffer, "Atidote");
+			t.EnumId = 2;
+			socket->sendToSomeone(&t, "127.0.0.1", SERVER_PORT);
+			socket->recvFromSomeone(ip, SERVER_PORT, &t);
+			memset(&t, 0, sizeof(t));
 			while (running == true)
 			{
 				
