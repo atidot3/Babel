@@ -15,7 +15,7 @@ class Logger {
     private:
         Logger() {};
         Logger(Logger const&) {};
-        Logger& operator=(Logger const&) {};
+	//        Logger& operator=(Logger const&) {};
         static Logger* m_Instance;
         std::ofstream logFile;
 };
