@@ -23,6 +23,8 @@ public:
 	bool 	initStream();
 	bool 	stopStream();
 	bool	closeStream();
+	bool 	initInput();
+	bool 	initOutput();
 	bool	initChannels();
 	bool 	terminatePa();
 	bool	writeStream(unsigned char *);
