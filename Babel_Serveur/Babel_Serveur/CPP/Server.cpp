@@ -1,10 +1,10 @@
 #include	<iostream>
-#include	"Protocole.hh"
-#include	"Server.hh"
+#include	"Include\Protocole.hh"
+#include	"Include\Server.hh"
 
 Server::Server()
 {
-  _sock = new socketUnix;
+  _sock = new AbstractSocket();
   _maxId= 0;
 }
 
@@ -102,8 +102,8 @@ void			Server::gestClient()
   while (it != clients.end())
     {
       if (protocole.Protocole_to_call(this, *it) == false)
-	it = clients.begin();
+		it = clients.begin();
       else
-	++it;
+		++it;
     }
 }

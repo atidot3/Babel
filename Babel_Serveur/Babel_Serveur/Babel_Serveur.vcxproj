@@ -10,6 +10,25 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="CPP\Client.cpp" />
+    <ClCompile Include="CPP\FileContact.cpp" />
+    <ClCompile Include="CPP\main.cpp" />
+    <ClCompile Include="CPP\Protocole.cpp" />
+    <ClCompile Include="CPP\Select.cpp" />
+    <ClCompile Include="CPP\Server.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Include\Client.hh" />
+    <None Include="Include\FileContact.hh" />
+    <None Include="Include\ISocket.hh" />
+    <None Include="Include\Protocole.hh" />
+    <None Include="Include\Select.hh" />
+    <None Include="Include\Server.hh" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Include\sockeWindows.hpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{9E0176AD-1A7B-4A1A-A1F0-74CB08382661}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
@@ -73,30 +92,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="Include\Client.h" />
-    <ClInclude Include="Include\ClientManager.h" />
-    <ClInclude Include="Include\iSocket.h" />
-    <ClInclude Include="Include\log.h" />
-    <ClInclude Include="Include\Protocole.h" />
-    <ClInclude Include="Include\server.h" />
-    <ClInclude Include="Include\socketException.h" />
-    <ClInclude Include="Include\socketWindows.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="CPP\Babel_Serveur.cpp" />
-    <ClCompile Include="CPP\Client.cpp" />
-    <ClCompile Include="CPP\ClientManager.cpp" />
-    <ClCompile Include="CPP\FileContact.cpp" />
-    <ClCompile Include="CPP\log.cpp" />
-    <ClCompile Include="CPP\Protocole.cpp" />
-    <ClCompile Include="CPP\server.cpp" />
-    <ClCompile Include="CPP\socketException.cpp" />
-    <ClCompile Include="CPP\socketWindows.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Include\FileContact.hh" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

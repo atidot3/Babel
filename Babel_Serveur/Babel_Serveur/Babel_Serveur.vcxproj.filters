@@ -13,71 +13,50 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Fichiers d%27en-tête\Socket">
-      <UniqueIdentifier>{b57681c3-a6d4-418d-8e2d-c968569bd15f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Fichiers sources\Socket">
-      <UniqueIdentifier>{6c0fbcdf-b40e-4a98-9fdc-cf5abf3ad71f}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Include\log.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\iSocket.h">
-      <Filter>Fichiers d%27en-tête\Socket</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\server.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\socketWindows.h">
-      <Filter>Fichiers d%27en-tête\Socket</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\socketException.h">
-      <Filter>Fichiers d%27en-tête\Socket</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\Client.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\ClientManager.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\Protocole.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="CPP\log.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="CPP\server.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="CPP\socketException.cpp">
-      <Filter>Fichiers sources\Socket</Filter>
-    </ClCompile>
-    <ClCompile Include="CPP\socketWindows.cpp">
-      <Filter>Fichiers sources\Socket</Filter>
-    </ClCompile>
-    <ClCompile Include="CPP\Babel_Serveur.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="CPP\Client.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="CPP\ClientManager.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="CPP\FileContact.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="CPP\main.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
     <ClCompile Include="CPP\Protocole.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="CPP\Select.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="CPP\Server.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Include\Client.hh">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </None>
     <None Include="Include\FileContact.hh">
       <Filter>Fichiers d%27en-tête</Filter>
     </None>
+    <None Include="Include\ISocket.hh">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </None>
+    <None Include="Include\Protocole.hh">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </None>
+    <None Include="Include\Select.hh">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </None>
+    <None Include="Include\Server.hh">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Include\sockeWindows.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

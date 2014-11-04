@@ -1,5 +1,5 @@
 #include		<iostream>
-#include		"Select.hh"
+#include		"Include\Select.hh"
 
 Select::Select(Server *server)
 {
@@ -23,13 +23,12 @@ bool			Select::init(Server *server)
   FD_SET(server->getSock()->realSock(), &readfds);
   while ((client = server->getClient(i, NULL)))
     {
-
-      if (server->getClient(i)->getSock()->realSock() > cs)
-	cs = server->getClient(i)->getSock()->realSock();
-      FD_SET(server->getClient(i)->getSock()->realSock(), &readfds);
-      if (server->getClient(i)->getSending() != NULL)
-	FD_SET(server->getClient(i)->getSock()->realSock(), &writefds);
-      ++i;
+		if (server->getClient(i)->getSock()->realSock() > cs)
+		cs = server->getClient(i)->getSock()->realSock();
+		FD_SET(server->getClient(i)->getSock()->realSock(), &readfds);
+		if (server->getClient(i)->getSending() != NULL)
+		FD_SET(server->getClient(i)->getSock()->realSock(), &writefds);
+		++i;
     }
   return (true);
 }
@@ -41,7 +40,7 @@ int			Select::waitFds(Server *server)
 
   client_sock = NULL;
   this->init(server);
-  ret = select(this->cs + 1, &readfds, &writefds, NULL, NULL);
+  ret = select(this->cs, &readfds, &writefds, NULL, NULL);
   return (ret);
 }
 

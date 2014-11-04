@@ -1,7 +1,7 @@
 #include	<iostream>
 #include	<cstring>
-#include	"Protocole.hh"
-#include	"Server.hh"
+#include	"Include\Protocole.hh"
+#include	"Include\Server.hh"
 
 Protocole::Protocole()
 {
@@ -157,10 +157,11 @@ bool		Protocole::Protocole_to_call(Server *server, Client *client)
     {
       id = client->getReceiving()->cmd;
       if (id > 8)
-	std::cout << "Protcole: Unknow enum" << std::endl;
+		std::cout << "Protcole: Unknow enum" << std::endl;
       //    Logger::Instance()->log(2, "Protocole: Unknow enum\n");
-      else
+    else
 	{
+		std::cout << id << std::endl;
 	  (*this.*func_tab[id])(server, client);
 	  client->setReceiving(NULL);
 	  if (id == 8)
