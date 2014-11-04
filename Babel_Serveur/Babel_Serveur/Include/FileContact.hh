@@ -10,17 +10,17 @@ class			FileContact
   std::list<
     std::string>	_list;
 
-private:
-  bool			checkExistence(const std::string &);
 public:
   FileContact(const std::string &);
   ~FileContact();
   bool			find(const std::string &);
   bool			add(const std::string &);
   bool			erase(const std::string &);
+  bool			checkExistence(const std::string &);
+  bool			eraseList();
   bool			fillList();
   std::list
-  <std::string>		getList();
+  <std::string>		*getList();
 };
 
 #endif

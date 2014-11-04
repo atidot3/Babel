@@ -14,19 +14,16 @@ RM		=	rm -f
 
 SRC_DIR		=	CPP/
 
-INC_DIR		=	./
+INC_DIR		=	Include/
 
 OBJ_DIR		=	obj/
 
-FILE		=	Babel_Serveur.cpp \
-			Client.cpp \
-			ClientManager.cpp \
+FILE		=	Client.cpp \
 			FileContact.cpp \
-			log.cpp \
+			main.cpp \
 			Protocole.cpp \
-			server.cpp \
-			socketException.cpp \
-			socketUnix.cpp
+			Select.cpp \
+			Server.cpp
 
 
 SRC		=	$(addprefix $(SRC_DIR), $(FILE))

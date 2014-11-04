@@ -1,71 +1,117 @@
-/*
-*
-* Client Manager
-*
-*/
+#include	<iostream>
+#include	"Client.hh"
 
-#include "Include/Client.h"
-
-Client::Client(const std::string &Username)
+Client::Client(int id)
 {
-  this->pseudo = Username;
-  this->contacts = new FileContact(Username);
+  _sock = NULL;
+  _ip = "";
+  _pseudo = "";
+  _contacts = NULL;
+  _id = id;
+  _sending = NULL;
+  _receiving = NULL;
+}
+
+Client::Client(ISocket *sock, int id)
+{
+  _sock = sock;
+  _ip = "";
+  _pseudo = "";
+  _id = id;
+  _sending = NULL;
+  _receiving = NULL;
+}
+
+Client::Client(ISocket *sock, const std::string &ip, int id)
+{
+  _sock = sock;
+  _ip = ip;
+  _id = id;
+  _sending = NULL;
+  _receiving = NULL;
+}
+
+Client::Client(ISocket *sock, const std::string &ip, const std::string &pseudo, int id)
+{
+  _sock = sock;
+  _ip = ip;
+  _pseudo = pseudo;
+  _id = id;
+  _sending = NULL;
+  _receiving = NULL;
 }
 
 Client::~Client()
 {
-  CONTACTIT IT = myList.begin();
-
-  while (IT != myList.end())
-    {
-      myList.erase(IT);
-    }
+  _sock->close();
 }
 
-Client::CONTACTLIST	Client::getContact()
+ISocket*		Client::getSock() const
 {
-  return this->myList;
+  return (_sock);
 }
 
-bool			Client::addContact(const std::string &pseudo)
+std::string		Client::getIp() const
 {
-  contacts->add(pseudo);
-  return (true);
+  return (_ip);
 }
 
-bool			Client::removeContact(const std::string &pseudo)
+std::string		Client::getPseudo() const
 {
-  contacts->erase(pseudo);
-  return (true);
+  return (_pseudo);
 }
 
-std::string		Client::IsAskingConnection()
+FileContact*		Client::getContacts() const
 {
-  /* Entrer dans cette fonction si le client veut demander un appel à quelqu'un
-
-     Récupère le pseudo du contact à appeller
-     return le pseudo
-  */
-  return ("blabla");
+  return (_contacts);
 }
 
-ISocket*		Client::acceptConnection(const std::string &pseudo)
+Proto_Struct*		Client::getSending() const
 {
-  /* demande au client s'il veut répondre à pseudo
-
-     attends la réponse
-     si oui -> return socket
-     si non -> return NULL
-
-     si celui qui appelle raccroche avant la réponse -> return NULL
- */
-  return (sock);
+  return (_sending);
 }
-bool			Client::isBusy()
+
+Proto_Struct*	Client::getReceiving() const
 {
-	return this->busy;
+  return (_receiving);
 }
-bool			Client::isCalled()
+
+int			Client::getId() const
 {
-	return this->called;
+  return (_id);
+}
+void			Client::setSock(ISocket *sock)
+{
+  _sock = sock;
+}
+
+void			Client::setIp(const std::string &ip)
+{
+  _ip = ip;
+  std::cout << _pseudo << std::endl;
+  _contacts = new FileContact(_pseudo);
+}
+
+void			Client::setPseudo(const std::string &pseudo)
+{
+  _pseudo = pseudo;
+}
+
+void			Client::setSending(Proto_Struct *sending)
+{
+  // if (_sending)
+  //   delete (_sending);
+  _sending = sending;
+}
+
+void			Client::setReceiving(Proto_Struct *receiving)
+{
+  // if (_receiving)
+  //   delete (_receiving);
+  _receiving = receiving;
+}
+
+void			Client::setId(int id)
+{
+  _id = id;
 }

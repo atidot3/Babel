@@ -1,4 +1,4 @@
-#include		"Include/FileContact.hh"
+#include		"FileContact.hh"
 #include		<string>
 #include		<iostream>
 #include		<vector>
@@ -6,6 +6,14 @@
 FileContact::FileContact(const std::string &pseudo)
 {
   this->_pseudo = "accounts/" + pseudo;
+  std::ofstream		file;
+
+  if (this->checkExistence(pseudo) == false)
+    {
+      std::cout << "Ne s'est jamais connecté avant" << std::endl;
+      file.open(_pseudo.c_str(), std::ios::out);
+      file.close();
+    }
 }
 
 FileContact::~FileContact()
@@ -42,6 +50,7 @@ bool			FileContact::add(const std::string &contact)
     {
       if (file)
 	{
+	  std::cout << _pseudo << std::endl;
 	  file.open(_pseudo.c_str(), std::ios::out | std::ios::app);
 	    file << contact << std::endl;
 	  file.close();
@@ -75,6 +84,19 @@ bool			FileContact::erase(const std::string &contact)
   return (false);
 }
 
+bool			FileContact::eraseList()
+{
+  std::list<std::string>::iterator	it;
+
+  it = _list.begin();
+  while (it != _list.end())
+    {
+      _list.erase(it);
+      it = _list.begin();
+    }
+  return (true);
+}
+
 bool			FileContact::fillList()
 {
   std::ifstream		file(_pseudo.c_str(), std::ios::in);
@@ -90,9 +112,11 @@ bool			FileContact::fillList()
   return (false);
 }
 
-std::list<std::string>	FileContact::getList()
+std::list<std::string>	*FileContact::getList()
 {
-  return (_list);
+  eraseList();
+  fillList();
+  return (&_list);
 }
 
 bool			FileContact::checkExistence(const std::string &contact)

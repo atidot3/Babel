@@ -1,6 +1,7 @@
+#include	<iostream>
 #include	<cstring>
-#include	"Include/Protocole.h"
-#include	"Include/server.h"
+#include	"Protocole.hh"
+#include	"Server.hh"
 
 Protocole::Protocole()
 {
@@ -19,147 +20,152 @@ Protocole::~Protocole()
 {
 }
 
-void		Protocole::Welcome(Struct_Proto *t, Server* srv)
+void		Protocole::Welcome(Server *server, Client *client)
 {
-	std::cout << "Welcome" << std::endl;
-	if (strcmp(t->Buffer, "salut") == 0)
-	{
-		Struct_Proto r;
-		r.audio = 0;
-		r.EnumId = SALUT;
-		strcpy(r.ip, t->ip);
-		strcpy(r.Buffer, "salut");
-		srv->socket->sendToSomeone(&r, r.ip, CLIENT_PORT);
-	}
+  Proto_Struct	*proto = new Proto_Struct;
+
+  proto->cmd = WELCOME;
+  memset(proto->buffer, 0, 512);
+  strcpy(proto->buffer, "WELCOME");
+  client->setSending(proto);
 }
 
-void		Protocole::Contact_List(Struct_Proto *t, Server* srv)
+void		Protocole::Contact_List(Server *server, Client *client)
 {
-	std::cout << "Contact_List" << std::endl;
+  Proto_Struct	*proto = new Proto_Struct;
+  std::string	contact_list = "";
+  std::list<std::string>*	list;
+  std::list<std::string>::iterator it;
+  bool				check = false;
+
+  std::cout << "Contact_List" << std::endl;
+  proto->cmd = CONTACT_LIST;
+  memset(proto->buffer, 0, 512);
+  list = client->getContacts()->getList();
+  it = list->begin();
+  while (it != list->end())
+    {
+      check = true;
+      contact_list += *it;
+      ++it;
+      if (it != list->end())
+	contact_list += " ";
+    }
+  if (check == true)
+    strcpy(proto->buffer, contact_list.c_str());
+  client->setSending(proto);  
 }
 
-void		Protocole::Contact_Add(Struct_Proto *t, Server* srv)
+void		Protocole::Contact_Add(Server *server, Client *client)
 {
-	std::cout << "Contact_Add" << std::endl;
-	if ((srv->FindUser(t->myPseudo)) == true)
-	{
-		Client* tmp = srv->GetUserSession(t->myPseudo);
-		if (tmp)
-		{
-			if (t->Buffer != NULL)
-				if ((tmp->addContact(t->Buffer)) == true)
-				{
-					Struct_Proto r;
-					r.audio = 0;
-					r.EnumId = CONTACT_ADD;
-					strcpy(r.ip, t->ip);
-					strcpy(r.Buffer, "ok");
-					srv->socket->sendToSomeone(&r, r.ip, CLIENT_PORT);
-				}
-				else
-				{
-					Logger::Instance()->log(2, "Protocole: Contact_Add error adding contact\n");
-					Struct_Proto r;
-					r.audio = 0;
-					r.EnumId = CONTACT_ADD;
-					strcpy(r.ip, t->ip);
-					strcpy(r.Buffer, "bad");
-					srv->socket->sendToSomeone(&r, r.ip, CLIENT_PORT);
-				}
-		}
-	}
+  Proto_Struct	*proto = new Proto_Struct;
+
+  proto->cmd = CONTACT_ADD;
+  memset(proto->buffer, 0, 512);
+  std::cout << "Contact_Add" << std::endl;
+  if (client->getContacts()->add(client->getReceiving()->buffer) == false)
+    strcpy(proto->buffer, "ko");
+  else
+  strcpy(proto->buffer, "ok");
+  client->setSending(proto);
 }
 
-void		Protocole::Contact_Remove(Struct_Proto *t, Server* srv)
+void		Protocole::Contact_Remove(Server *server, Client *client)
 {
-	std::cout << "Contact_Remove" << std::endl;
-	if ((srv->FindUser(t->myPseudo)) == true)
-	{
-		Client* tmp = srv->GetUserSession(t->myPseudo);
-		if (tmp)
-		{
-			if (t->Buffer != NULL)
-				if ((tmp->removeContact(t->Buffer)) == true)
-				{
-					Struct_Proto r;
-					r.audio = 0;
-					r.EnumId = CONTACT_REMOVE;
-					strcpy(r.ip, t->ip);
-					strcpy(r.Buffer, "ok");
-					srv->socket->sendToSomeone(&r, r.ip, CLIENT_PORT);
-				}
-				else
-				{
-					Logger::Instance()->log(2, "Protocole: Contact_Remove error removing contact\n");
-					Struct_Proto r;
-					r.audio = 0;
-					r.EnumId = CONTACT_REMOVE;
-					strcpy(r.ip, t->ip);
-					strcpy(r.Buffer, "bad");
-					srv->socket->sendToSomeone(&r, r.ip, CLIENT_PORT);
-				}
-		}
-	}
+  Proto_Struct	*proto = new Proto_Struct;
+
+  proto->cmd = CONTACT_REMOVE;
+  memset(proto->buffer, 0, 512);
+  std::cout << "Contact_Remove" << std::endl;
+  if (client->getContacts()->erase(client->getReceiving()->buffer) == false)
+    strcpy(proto->buffer, "ko");
+  else
+    strcpy(proto->buffer, "ok");
+  client->setSending(proto);
 }
 
-void		Protocole::Contact_Call_Me(Struct_Proto *t, Server* srv)
+void		Protocole::Contact_Call_Me(Server *server, Client *client)
 {
-	std::cout << "Contact_Call_Me" << std::endl;
+  Proto_Struct	*proto = new Proto_Struct;
+  Client	*other;
+
+  proto->cmd = CONTACT_CALL_ME;
+  memset(proto->buffer, 0, 512);
+  std::cout << "Contact_Call_Me" << std::endl;
+  if ((other = server->getClient(client->getReceiving()->buffer)) == NULL)
+    {
+      strcpy(proto->buffer, client->getIp().c_str());
+      other->setSending(proto);
+      memset(proto->buffer, 0, 512);
+      strcpy(proto->buffer, "ok");
+    }
+  else
+    strcpy(proto->buffer, "ko");
+  client->setSending(proto);  
 }
 
-void		Protocole::Contact_To_Call(Struct_Proto *t, Server* srv)
+void		Protocole::Contact_To_Call(Server *server, Client *client)
 {
-	std::cout << "Contact_To_Call" << std::endl;
+  Proto_Struct	*proto = new Proto_Struct;
+  Client	*other;
+
+  proto->cmd = CONTACT_TO_CALL;
+  memset(proto->buffer, 0, 512);
+  std::cout << "Contact_To_Call" << std::endl;
+  if ((other = server->getClient(client->getReceiving()->buffer)) == NULL)
+    {
+      strcpy(proto->buffer, client->getPseudo().c_str());
+      other->setSending(proto);
+      memset(proto->buffer, 0, 512);
+      strcpy(proto->buffer, "ok");
+    }
+  else
+    strcpy(proto->buffer, "ko");
+  client->setSending(proto);
 }
 
-void		Protocole::Authentification(Struct_Proto *t, Server* srv)
+void		Protocole::Authentification(Server *server, Client *client)
 {
-	std::cout << "Auth" << std::endl;
-	if (t->Buffer != NULL)
-	{
-		Client* newOne = new Client(t->Buffer);
-		if ((srv->AddUser(t->Buffer, newOne)) == true)
-		{
-			Struct_Proto r;
-			r.audio = 0;
-			r.EnumId = AUTH;
-			strcpy(r.ip, t->ip);
-			strcpy(r.Buffer, "ok");
-			srv->socket->sendToSomeone(&r, r.ip, CLIENT_PORT);
-		}
-		else
-		{
-			Logger::Instance()->log(2, "Protocole: Authentification error adding new client\n");
-			Struct_Proto r;
-			r.audio = 0;
-			r.EnumId = AUTH;
-			strcpy(r.ip, t->ip);
-			strcpy(r.Buffer, "bad");
-			srv->socket->sendToSomeone(&r, r.ip, CLIENT_PORT);
-		}
-	}
+  Proto_Struct	*proto = new Proto_Struct;
+
+  memset(proto->buffer, 0, 512);
+  std::cout << "Auth" << std::endl;
+  if (client->getPseudo() == "")
+    client->setPseudo(client->getReceiving()->buffer);
+  else
+    client->setIp(client->getReceiving()->buffer);
+  proto->cmd = AUTH;
+  strcpy(proto->buffer, "ok");
+  client->setSending(proto);
 }
-void		Protocole::Send_Audio(Struct_Proto *t, Server* srv)
+void		Protocole::Send_Audio(Server *server, Client *client)
 {
 	std::cout << "send audio" << std::endl;
 }
-void		Protocole::Disconnect(Struct_Proto *t, Server* srv)
+void		Protocole::Disconnect(Server *server, Client *client)
 {
-	std::cout << "Client " << t->myPseudo << " had requested disconnection" << std::endl;
-	if ((srv->RemoveUser(t->Buffer)) == true)
-	{
-		Logger::Instance()->log(2, "Protocole: Disconnect error removing client\n");
-	}
-	else
-	{
-		std::cout << "Client " << (string)t->myPseudo << " disconnected" << std::endl;
-	}
+  server->removeClient(client->getId());
+  std::cout << "Client " << client->getPseudo() << " had requested disconnection" << std::endl;
 }
-void		Protocole::Protocole_to_call(Struct_Proto *t, Server* srv)
+
+bool		Protocole::Protocole_to_call(Server *server, Client *client)
 {
-	int id = t->EnumId;
-  if (id - 1 > 9)
-    Logger::Instance()->log(2, "Protocole: Unknow enum\n");
-  else
-	(*this.*func_tab[id - 1])(t, srv);
+  int id;
+
+  id = 0;
+  if (client->getReceiving())
+    {
+      id = client->getReceiving()->cmd;
+      if (id > 8)
+	std::cout << "Protcole: Unknow enum" << std::endl;
+      //    Logger::Instance()->log(2, "Protocole: Unknow enum\n");
+      else
+	{
+	  (*this.*func_tab[id])(server, client);
+	  client->setReceiving(NULL);
+	  if (id == 8)
+	    return (false);
+	}
+    }
+  return (true);
 }
