@@ -30,7 +30,7 @@ FORMS    += $$UI/mainwindow.ui \
 RESOURCES += \
     $$RSC/Assets.qrc
 
-LIBS += -L$$PWD/lib -lportaudio -lopus
+#LIBS += -L$$PWD/lib -lportaudio -lopus
 
 release: DESTDIR = build/release
 debug:   DESTDIR = build/debug

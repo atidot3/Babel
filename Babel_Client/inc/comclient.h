@@ -4,16 +4,24 @@
 #include <QString>
 #include <QUdpSocket>
 
-class ComClient
+class ComClient : public QObject
 {
 private:
+    QObject     *parent;
     QUdpSocket  *getUdpSocket;
     QUdpSocket  *sendUdpSocket;
-    int                 getPort;
-    int                 sendPort;
+    quint16                 getPort;
+    quint16                 sendPort;
+    typedef struct {
+        int size;
+        void *data;
+    } Datagram;
+
+public slots :
+    void getData();
 public:
     ComClient(int, int, QObject *);
-    void sendData(char *);
+    void sendData(int size, char *data);
 };
 
 #endif // COMCLIENT_H
