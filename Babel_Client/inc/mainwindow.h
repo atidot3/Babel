@@ -23,6 +23,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     Application *newApplication;
+    ComClient   *client;
 };
 
 #endif // MAINWINDOW_H
