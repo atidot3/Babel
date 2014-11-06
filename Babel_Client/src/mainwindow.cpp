@@ -7,9 +7,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    //ui->tvGetPort->text();
-    this->client = new ComClient(6666, 8888, this);
-    this->client->sendData(8, "coucou");
+    server = new ComServer();
+    server->connectToHost();
 }
 
 MainWindow::~MainWindow()
@@ -31,7 +30,7 @@ void MainWindow::on_pushButton_clicked()
             if (ipAddress == "")
                 newApplication->setIpAddress("127.0.0.1");
             newApplication = new Application();
-            newApplication->setIpAddress(ipAddress);
+            newApplication->setServer(server);
             newApplication->setPseudo(pseudo);
             newApplication->show();
             this->close();

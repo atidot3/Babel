@@ -21,6 +21,7 @@ public:
     void    setIpAddress(QString);
     QString    getPseudo();
     QString    getIpAddress();
+    void setServer(ComServer *);
 
 private slots:
 
@@ -33,6 +34,7 @@ private slots:
     void hangUp();
 
     void on_contactList_clicked(const QModelIndex &index);
+
 
 private:
     Ui::Application *ui;
