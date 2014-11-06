@@ -2,16 +2,13 @@
 #define AUDIOHANDLER_H_
 
 #include "../portaudio/include/portaudio.h"
+#include "EncodeAudio.h"
+#include "AudioSettings.h"
 
 #include <iostream>
 #include <string>
-
-#define NUM_SECONDS   (4)
-#define SAMPLE_RATE   (44100)
-#define FRAMES_PER_BUFFER (1024)
-#define SAMPLE_TYPE paInt24
-#define NUM_CHANNELS    (2)
-#define SAMPLE_SIZE (3)
+#include <stdio.h>
+#include <string.h>
 
 class AudioHandler
 {
@@ -19,19 +16,28 @@ public:
 	AudioHandler();
 	~AudioHandler();
 
-	bool 	initializePa();
+	bool 	initializeAudio();
 	bool 	initStream();
-	bool 	stopStream();
 	bool	closeStream();
 	bool 	initInput();
 	bool 	initOutput();
-	bool	initChannels();
+	bool	startStream();
+	bool 	stopStream();
 	bool 	terminatePa();
 	bool	writeStream(unsigned char *);
 	bool	readStream();
 	void 	cleanReadBuffer();
 	int 	getReadBufferSize() const;
 	unsigned char 	*getReadBuffer() const;
+	EncodeAudio 	*getEnc();
+	int 			getSizeRec();
+	void 			setSizeRec(int);
+	int 			getSizePlay();
+	void 			setSizePlay(int);
+	unsigned char 	*getStaticBufferRec();
+	unsigned char 	*getStaticBufferPlay();
+	void 			errorAudio();
+	bool 			isRunning();
 
 protected:
 	PaStream  				*_stream;
@@ -40,6 +46,15 @@ protected:
 	PaStreamParameters		_inputChannel;
 	PaStreamParameters		_outputChannel;
 	unsigned char			*_readBuffer;
+	EncodeAudio 			*_enc;
+	int 					_sizeRec;
+	int 					_sizePlay;
+	unsigned char 			_staticBufferRec[255 * 255];
+	unsigned char 			_staticBufferPlay[255 * 255];
+	PaStream				*_streamin;
+	PaStream				*_streamout;
+	bool 					_run;
+	bool 					_started;
 };
 
 #endif

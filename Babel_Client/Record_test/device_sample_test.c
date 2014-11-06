@@ -23,7 +23,7 @@ int main(int ac, char **av)
 {
 	PaStreamParameters inputParameters;
 	PaStreamParameters outputParameters;
-	double desiredSampleRate = 48000;
+	double desiredSampleRate = 55000;
 
 	PaError err;
 
@@ -34,22 +34,22 @@ int main(int ac, char **av)
 		return (-1);
 	}
 
-	inputParameters.device = Pa_GetDefaultInputDevice(); /* default input device */
+	inputParameters.device = Pa_GetDefaultInputDevice();
 	if (inputParameters.device == paNoDevice)
 	{
 		fprintf(stderr,"Error: No default input device.\n");
 	}
-    inputParameters.channelCount = 2;                    /* stereo input */
+    inputParameters.channelCount = 2;
 	inputParameters.sampleFormat = PA_SAMPLE_TYPE;
 	inputParameters.suggestedLatency = Pa_GetDeviceInfo( inputParameters.device )->defaultLowInputLatency;
 	inputParameters.hostApiSpecificStreamInfo = NULL;
-
-    outputParameters.device = Pa_GetDefaultOutputDevice(); /* default output device */
+0
+    outputParameters.device = Pa_GetDefaultOutputDevice();
 	if (outputParameters.device == paNoDevice)
 	{
 		fprintf(stderr,"Error: No default output device\n");
 	}
-    outputParameters.channelCount = 2;                     /* stereo output */
+    outputParameters.channelCount = 2;
 	outputParameters.sampleFormat =  PA_SAMPLE_TYPE;
 	outputParameters.suggestedLatency = Pa_GetDeviceInfo( outputParameters.device )->defaultLowOutputLatency;
 	outputParameters.hostApiSpecificStreamInfo = NULL;

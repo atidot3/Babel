@@ -2,7 +2,7 @@
     #include <math.h>
     #include "../portaudio/include/portaudio.h"
     #define NUM_SECONDS   (4)
-    #define SAMPLE_RATE   (44100)
+    #define SAMPLE_RATE   (48000)
 
 typedef struct
 {

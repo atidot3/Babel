@@ -33,6 +33,9 @@
     #define PRINTF_S_FORMAT "%d"
     *///#endif
     
+    #define PLAY_MUTEX  "play"
+    #define REC_MUTEX   "rec"
+
     typedef struct
     {
       int          frameIndex;
@@ -45,51 +48,21 @@
       unsigned long framesPerBuffer, const PaStreamCallbackTimeInfo* timeInfo,
       PaStreamCallbackFlags statusFlags, void *userData)
     {
-      paTestData *data = (paTestData*)userData;
-      const SAMPLE *rptr = (const SAMPLE*)inputBuffer;
-      SAMPLE *wptr = &data->recordedSamples[data->frameIndex * NUM_CHANNELS];
-      long framesToCalc;
-      long i;
-      int finished;
-      unsigned long framesLeft = data->maxFrameIndex - data->frameIndex;
-
-      (void) outputBuffer;
+      const SAMPLE *in = (const SAMPLE *)inputBuffer;
+      int retenc(0);
       (void) timeInfo;
       (void) statusFlags;
-      (void) userData;
+      (void) outputBuffer;
 
-      if(framesLeft < framesPerBuffer)
+      unsigned char *tmp = encodeAudio(in, &retenc);
+
+      if (dis->getSizeRec() + retenc < 255*255)
       {
-        framesToCalc = framesLeft;
-        finished = paComplete;
-      }
-      else
-      {
-        framesToCalc = framesPerBuffer;
-        finished = paContinue;
+        memcpy(dis->getStaticBufferRec() + dis->getSizeRec(), tmp, retenc);
+        dis->setSizeRec(dis->getSizeRec() + retenc);
       }
 
-      if(inputBuffer == NULL)
-      {
-        for( i = 0; i < framesToCalc; i++ )
-        {
-          *wptr++ = SAMPLE_SILENCE;
-          if(NUM_CHANNELS == 2)
-            *wptr++ = SAMPLE_SILENCE;
-        }
-      }
-      else
-      {
-        for(i = 0; i < framesToCalc; i++)
-        {
-          *wptr++ = *rptr++;
-          if(NUM_CHANNELS == 2)
-            *wptr++ = *rptr++;
-        }
-      }
-
-      data->frameIndex += framesToCalc;
-      return finished;
+      return paContinue;
     }
 
     static int playCallback(const void *inputBuffer, void *outputBuffer,

@@ -1,13 +1,12 @@
-#include "AudioHandler.h"
+#include "../inc/AudioHandler.h"
 
 int 	main()
 {
-	AudioHandler audio;
+	AudioHandler *_audio = new AudioHandler();
 
-	audio.initializePa();
-	audio.initChannels();
-	audio.initStream();
-	audio.writeStream(audio.getReadBuffer());
-	audio.readStream();
+	_audio->initializeAudio();
+	_audio->startStream();
+	_audio->stopStream();
+	delete _audio;
 	return (0);
 }

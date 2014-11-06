@@ -1,0 +1,9 @@
+typedef float				SAMPLE;
+#define	ENCODESAMPLE_RATE	(24000)
+#define	AUDIOSAMPLE_RATE 	(24000)
+#define	FRAMES_PER_BUFFER	(480)
+#define NUM_SECONDS   (4)
+#define SAMPLE_RATE   (24000)
+#define SAMPLE_TYPE paFloat32
+#define NUM_CHANNELS    (2)
+#define SAMPLE_SIZE (3)
