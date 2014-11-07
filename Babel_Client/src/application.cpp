@@ -9,8 +9,6 @@ Application::Application(QWidget *parent) :
 {
     ui->setupUi(this);
     isCalling = false;
-    //ui->contactList->clear();
-    this->server = new ComServer(this->ipAddress);
 }
 
 Application::~Application()
@@ -78,4 +76,8 @@ QString Application::getIpAddress()
 QString Application::getPseudo()
 {
     return (this->pseudo);
+}
+
+void Application::setServer(ComServer *server) {
+    this->server = server;
 }
