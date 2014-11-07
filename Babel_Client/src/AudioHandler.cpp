@@ -11,6 +11,7 @@ AudioHandler::AudioHandler()
   this->_started = false;
   this->_sizeRec = 0;
   this->_sizePlay = 0;
+  this->_run = true;
 }
 
 AudioHandler::~AudioHandler()
@@ -234,4 +235,9 @@ EncodeAudio 	*AudioHandler::getEnc()
 bool 			AudioHandler::isRunning()
 {
 	return (this->_started);
+}
+
+bool 			AudioHandler::checkRun()
+{
+	return (this->_run);
 }

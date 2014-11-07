@@ -38,6 +38,7 @@ public:
 	unsigned char 	*getStaticBufferPlay();
 	void 			errorAudio();
 	bool 			isRunning();
+	bool 			checkRun();
 
 protected:
 	PaStream  				*_stream;
