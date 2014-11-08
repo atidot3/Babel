@@ -25,6 +25,7 @@ public:
 	{
 		wprintf(L"socket function failed with error: %ld\n", WSAGetLastError());
         WSACleanup();
+		throw std::runtime_error("socket function failed");
 	}
   }
 
@@ -52,6 +53,7 @@ public:
 		{
 			wprintf(L"closesocket function failed with error %d\n", WSAGetLastError());
 		}
+		throw std::runtime_error("bind function failed");
 		WSACleanup();
 		delete(this);
 		return false;
@@ -69,6 +71,7 @@ public:
 			wprintf(L"closesocket function failed with error %d\n", WSAGetLastError());
 		}
 		WSACleanup();
+		throw std::runtime_error("listen function failed");
 		return false;
 	}
     return (true);
@@ -87,8 +90,9 @@ public:
 
     if ((newSock = ::accept(sock, (SOCKADDR *)&csin, &csinSize)) == INVALID_SOCKET)
     {
-		wprintf(L"socket function failed with error: %ld\n", WSAGetLastError());
+		wprintf(L"accept function failed with error: %ld\n", WSAGetLastError());
 		WSACleanup();
+		throw std::runtime_error("accept function failed");
         return NULL;
     }
 	clientSocket = new socketWindows(newSock);
@@ -112,8 +116,9 @@ public:
         if ((closesocket(sock)) == SOCKET_ERROR)
 		{
 			wprintf(L"closesocket failed with error: %d\n", WSAGetLastError());
-			WSACleanup();
 		}
+		WSACleanup();
+		throw std::runtime_error("sendto function failed");
 	}
   }
   
@@ -127,12 +132,13 @@ public:
 		if ((closesocket(sock)) == SOCKET_ERROR)
 		{
 			wprintf(L"closesocket failed with error: %d\n", WSAGetLastError());
-			WSACleanup();
 		}
+		WSACleanup();
+		throw std::runtime_error("recvfrom function failed");
 	  }
   }
 };
 #ifdef WIN32
-typedef socketWindows AbstractSocket;
+	typedef socketWindows AbstractSocket;
 #endif
 #endif
