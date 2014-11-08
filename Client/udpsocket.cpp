@@ -1,40 +1,33 @@
 #include "udpsocket.h"
 #include <iostream>
 
-UdpSocket::UdpSocket(QObject *parent) :
-    QObject(parent)
+ComClient::ComClient(int get, int send, QObject *parent)
 {
-    socket = new QUdpSocket(this);
-    getPort = 6667;
-    sendPort = 6667;
-    sendIp = "127.0.0.1";
-    socket->bind(QHostAddress::Any, getPort);
-    connect(socket, SIGNAL(readyRead()), this, SLOT(readyRead()));
+    this->getPort = get;
+    this->sendPort = send;
+    this->parent = parent;
+    this->sendUdpSocket = new QUdpSocket(parent);
+    this->sendUdpSocket->bind(QHostAddress::LocalHost, this->sendPort);
+    this->getUdpSocket = new QUdpSocket(parent);
+    this->getUdpSocket->bind(QHostAddress::LocalHost, this->getPort);
+    connect(this->getUdpSocket,SIGNAL(readyRead()), this, SLOT(getData()));
 }
 
-void UdpSocket::readyRead() {
-    QHostAddress getIp;
+void ComClient::sendData(int size, char *data)
+{
+    QByteArray datagram;
 
-    buffer.clear();
-    buffer.resize(socket->pendingDatagramSize());
-    socket->readDatagram(buffer.data(), buffer.size(), &getIp, &getPort);
+    datagram.append(QByteArray::number(size, 10));
+    datagram.append(data);
+    this->sendUdpSocket->writeDatagram(datagram, QHostAddress::LocalHost, this->sendPort);
 }
 
-void UdpSocket::sendData(const QByteArray data) {
-    QHostAddress address;
+void ComClient::getData() {
+    QByteArray buffer;
+    QHostAddress sender;
 
-    address.setAddress(sendIp);
-    socket->writeDatagram(data, address, sendPort);
-}
+    buffer.resize(this->getUdpSocket->pendingDatagramSize());
+    this->getUdpSocket->readDatagram(buffer.data(),buffer.size(),&sender, &this->sendPort);
 
-void UdpSocket::setSendIp(const QString ip) {
-    sendIp = ip;
-}
-
-const QString UdpSocket::getSendIp() {
-    return (sendIp);
-}
-
-const QByteArray UdpSocket::getData() {
-    return (buffer);
+    std::cout << sender.toString().toUtf8().constData() << std::endl;
 }

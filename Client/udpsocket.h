@@ -3,27 +3,25 @@
 
 #include <QObject>
 #include <QUdpSocket>
-#include "ISocket.hh"
 
-class UdpSocket : public QObject, public ISocket
+class ComClient : public QObject
 {
-    Q_OBJECT
-public:
-    explicit UdpSocket(QObject *parent = 0);
-    void sendData(const QByteArray);
-    const QString getSendIp();
-    void setSendIp(const QString);
-
-signals:
-
-public slots:
-    void readyRead();
 private:
-    QByteArray  buffer;
-    QUdpSocket   *socket;
+    QObject     *parent;
+    QUdpSocket  *getUdpSocket;
+    QUdpSocket  *sendUdpSocket;
     quint16     getPort;
     quint16     sendPort;
-    QString     sendIp;
+    typedef struct {
+        int size;
+        void *data;
+    } Datagram;
+
+public slots :
+    void getData();
+public:
+    ComClient(int, int, QObject *);
+    void sendData(int size, char *data);
 };
 
 #endif // UDPSOCKET_H
