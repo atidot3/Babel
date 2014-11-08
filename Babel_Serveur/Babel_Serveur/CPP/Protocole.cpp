@@ -1,7 +1,7 @@
 #include	<iostream>
 #include	<cstring>
-#include	"Include\Protocole.hh"
-#include	"Include\Server.hh"
+#include	"Include/Protocole.hh"
+#include	"Include/Server.hh"
 
 Protocole::Protocole()
 {
@@ -26,7 +26,6 @@ void		Protocole::Welcome(Server *server, Client *client)
 
   proto->cmd = WELCOME;
   memset(proto->buffer, 0, 512);
-  strcpy(proto->buffer, "WELCOME");
   client->setSending(proto);
 }
 
@@ -84,6 +83,24 @@ void		Protocole::Contact_Remove(Server *server, Client *client)
   client->setSending(proto);
 }
 
+void		Protocole::Contact_Call_Refuse(Server *server, Client *client)
+{
+  Proto_Struct	*proto = new Proto_Struct;
+  Client	*other;
+
+  proto->cmd = CONTACT_CALL_REFUSE;
+  memset(proto->buffer, 0, 512);
+  std::cout << "Contact_Call_Refuse" << std::endl;
+  if ((other = server->getClient(client->getReceiving()->buffer)) == NULL)
+    {
+      other->setSending(proto);
+      memset(proto->buffer, 0, 512);
+      strcpy(proto->buffer, "ok");
+    }
+  else
+    strcpy(proto->buffer, "ko");
+  client->setSending(proto);  
+}
 void		Protocole::Contact_Call_Me(Server *server, Client *client)
 {
   Proto_Struct	*proto = new Proto_Struct;
@@ -156,12 +173,12 @@ bool		Protocole::Protocole_to_call(Server *server, Client *client)
   if (client->getReceiving())
     {
       id = client->getReceiving()->cmd;
-      if (id > 8)
-		std::cout << "Protcole: Unknow enum" << std::endl;
-      //    Logger::Instance()->log(2, "Protocole: Unknow enum\n");
-    else
+      if (id > 9)
+	std::cout << "Protcole: Unknow enum" << std::endl;
+      //    Logger::Instance()->log(2, "Protocole: Unknow enum/n");
+      else
 	{
-		std::cout << id << std::endl;
+	  std::cout << id << std::endl;
 	  (*this.*func_tab[id])(server, client);
 	  client->setReceiving(NULL);
 	  if (id == 8)

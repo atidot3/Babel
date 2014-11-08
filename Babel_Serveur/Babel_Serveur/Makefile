@@ -14,7 +14,7 @@ RM		=	rm -f
 
 SRC_DIR		=	CPP/
 
-INC_DIR		=	Include/
+INC_DIR		=	./
 
 OBJ_DIR		=	obj/
 

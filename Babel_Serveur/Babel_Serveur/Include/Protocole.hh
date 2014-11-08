@@ -1,7 +1,7 @@
 #ifndef				PROTOCOLE_HH_
 # define			PROTOCOLE_HH_
 
-# include			"Server.hh"
+# include			"Include/Server.hh"
 
 
 class				Protocole
@@ -10,6 +10,7 @@ class				Protocole
 
 private:
   ptr			func_tab[9];
+
 public:
   Protocole();
   ~Protocole();
@@ -21,6 +22,7 @@ private:
   void			Contact_Add(Server *, Client *);
   void			Contact_Remove(Server *, Client *);
   void			Contact_Call_Me(Server *, Client *);
+  void			Contact_Call_Refuse(Server *, Client *);
   void			Contact_To_Call(Server *, Client *);
   void			Authentification(Server *, Client *);
   void			Send_Audio(Server *, Client *);

@@ -83,5 +83,5 @@ public:
     read(sock, proto, sizeof(Proto_Struct));
   }
 };
-
+typedef socketUnix AbstractSocket;
 #endif

@@ -17,7 +17,7 @@
 #  define  TYPE int
 # endif
 
-# define	PORT	4242
+# define	PORT	4243
 
   enum			PROTOCOLE_ENUM
     {
@@ -27,6 +27,7 @@
       CONTACT_ADD,
       CONTACT_REMOVE,
       CONTACT_CALL_ME,
+      CONTACT_CALL_REFUSE,
       CONTACT_TO_CALL,
       SEND_AUDIO,
       DISCONNECT
@@ -54,7 +55,7 @@ public:
 };
 
 # ifdef	_WIN32
-#  include "Include\sockeWindows.hpp"
+#  include "Include/sockeWindows.hpp"
 # else
 #  include "socketUnix.hpp"
 # endif

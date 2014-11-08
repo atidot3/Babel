@@ -6,6 +6,7 @@
 
 class			FileContact
 {
+  std::string		_user;
   std::string		_pseudo;
   std::list<
     std::string>	_list;

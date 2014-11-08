@@ -1,16 +1,17 @@
-#include		"Include\FileContact.hh"
+#include		"Include/FileContact.hh"
 #include		<string>
 #include		<iostream>
 #include		<vector>
 
 FileContact::FileContact(const std::string &pseudo)
 {
-  this->_pseudo = "accounts/" + pseudo;
   std::ofstream		file;
+
+  this->_user = pseudo;
+  this->_pseudo = "accounts/" + pseudo;
 
   if (this->checkExistence(pseudo) == false)
     {
-      std::cout << "Ne s'est jamais connecté avant" << std::endl;
       file.open(_pseudo.c_str(), std::ios::out);
       file.close();
     }
@@ -44,6 +45,9 @@ bool			FileContact::add(const std::string &contact)
 {
   std::ofstream		file;
 
+  std::cout << contact << ", " << this->_user << std::endl;
+  if (contact == this->_user)
+    return (false);
   if (this->checkExistence(contact) == false)
     return (false);
   if (this->find(contact) == false)

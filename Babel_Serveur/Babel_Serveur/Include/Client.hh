@@ -1,9 +1,9 @@
 #ifndef		CLIENT_HH_
 # define	CLIENT_HH_
 
-# include	"FileContact.hh"
+# include	"Include/FileContact.hh"
 # include	<string>
-# include	"ISocket.hh"
+# include	"Include/ISocket.hh"
 
 class		Client
 {

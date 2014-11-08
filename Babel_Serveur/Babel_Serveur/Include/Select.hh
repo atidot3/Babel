@@ -1,7 +1,7 @@
 #ifndef		SELECT_HH_
 # define	SELECT_HH_
 
-#include	"Server.hh"
+#include	"Include/Server.hh"
 # ifdef	_WIN32
 	#include	<WS2tcpip.h>
 #else

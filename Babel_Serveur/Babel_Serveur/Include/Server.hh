@@ -3,8 +3,8 @@
 
 # include	<list>
 
-# include	"ISocket.hh"
-# include	"Client.hh"
+# include	"Include/ISocket.hh"
+# include	"Include/Client.hh"
 
 class		Server
 {
