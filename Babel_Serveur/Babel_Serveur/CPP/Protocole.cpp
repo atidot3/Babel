@@ -175,7 +175,6 @@ bool		Protocole::Protocole_to_call(Server *server, Client *client)
       id = client->getReceiving()->cmd;
       if (id > 9)
 	std::cout << "Protcole: Unknow enum" << std::endl;
-      //    Logger::Instance()->log(2, "Protocole: Unknow enum/n");
       else
 	{
 	  std::cout << id << std::endl;

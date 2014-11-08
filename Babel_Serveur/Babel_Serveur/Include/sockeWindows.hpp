@@ -22,7 +22,10 @@ public:
 	WSAStartup(MAKEWORD(2,2), &WSAData);
     
 	if ((sock = ::socket(AF_INET, SOCK_STREAM, 0)) == INVALID_SOCKET)
-        std::cout << "Could not create client socket" << std::endl;
+	{
+		wprintf(L"socket function failed with error: %ld\n", WSAGetLastError());
+        WSACleanup();
+	}
   }
 
   socketWindows(int fd)
@@ -44,21 +47,35 @@ public:
     sin.sin_addr.s_addr = INADDR_ANY;
     if (::bind(sock, (SOCKADDR *)(&sin), sizeof(sin)) == -1)
 	{
-		std::cout << "BIND ERROR" << std::endl;
+		wprintf(L"bind function failed with error %d\n", WSAGetLastError());
+		if ((closesocket(sock)) == SOCKET_ERROR)
+		{
+			wprintf(L"closesocket function failed with error %d\n", WSAGetLastError());
+		}
+		WSACleanup();
 		delete(this);
+		return false;
 	}
-    return (0);
+    return true;
   }
 
   virtual bool	listen()
   {
-    ::listen(sock, 42);
+    if ((::listen(sock, 42)) == SOCKET_ERROR)
+	{
+		wprintf(L"listen function failed with error: %d\n", WSAGetLastError());
+		if ((closesocket(sock)) == SOCKET_ERROR)
+		{
+			wprintf(L"closesocket function failed with error %d\n", WSAGetLastError());
+		}
+		WSACleanup();
+		return false;
+	}
     return (true);
   }
 
   virtual void	close()
   {
-    //delete(this);
   }
 
   virtual ISocket*	accept()
@@ -70,7 +87,8 @@ public:
 
     if ((newSock = ::accept(sock, (SOCKADDR *)&csin, &csinSize)) == INVALID_SOCKET)
     {
-		std::cout << "NULL" << std::endl;
+		wprintf(L"socket function failed with error: %ld\n", WSAGetLastError());
+		WSACleanup();
         return NULL;
     }
 	clientSocket = new socketWindows(newSock);
@@ -84,22 +102,34 @@ public:
 
   virtual void		sendToSomeone(Proto_Struct *proto, const std::string &ip, int port)
   {
-    /*if ((write(sock, proto, sizeof(Proto_Struct))) == -1)
-		std::cout << "WRITE ERROR" << std::endl;*/
 	SOCKADDR_IN toSin;
     toSin.sin_addr.s_addr = inet_addr(ip.c_str());
     toSin.sin_family = AF_INET;
     toSin.sin_port	= htons(port);
-	::sendto(sock, (char*)proto, sizeof(Proto_Struct), 0, (SOCKADDR *)&toSin, sizeof(toSin));
+	if ((::sendto(sock, (char*)proto, sizeof(Proto_Struct), 0, (SOCKADDR *)&toSin, sizeof(toSin))) == SOCKET_ERROR)
+	{
+		wprintf(L"sendto failed with error: %d\n", WSAGetLastError());
+        if ((closesocket(sock)) == SOCKET_ERROR)
+		{
+			wprintf(L"closesocket failed with error: %d\n", WSAGetLastError());
+			WSACleanup();
+		}
+	}
   }
   
   virtual void		recvFromSomeone(const std::string &ip, int port, Proto_Struct *proto)
   {
-    /*if ((read(sock, proto, sizeof(Proto_Struct))) == -1)
-		std::cout << "READ ERROR" << std::endl;*/
 	  SOCKADDR_IN fromSin;
       int fromLen = sizeof(fromSin);
-	  ::recvfrom(sock, (char*)proto, sizeof(Proto_Struct), 0, (SOCKADDR *)&fromSin, &fromLen);
+	  if ((::recvfrom(sock, (char*)proto, sizeof(Proto_Struct), 0, (SOCKADDR *)&fromSin, &fromLen)) == SOCKET_ERROR)
+	  {
+		wprintf(L"recvfrom failed with error: %d\n", WSAGetLastError());
+		if ((closesocket(sock)) == SOCKET_ERROR)
+		{
+			wprintf(L"closesocket failed with error: %d\n", WSAGetLastError());
+			WSACleanup();
+		}
+	  }
   }
 };
 #ifdef WIN32

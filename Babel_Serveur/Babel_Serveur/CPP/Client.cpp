@@ -99,15 +99,11 @@ void			Client::setPseudo(const std::string &pseudo)
 
 void			Client::setSending(Proto_Struct *sending)
 {
-  // if (_sending)
-  //   delete (_sending);
   _sending = sending;
 }
 
 void			Client::setReceiving(Proto_Struct *receiving)
 {
-  // if (_receiving)
-  //   delete (_receiving);
   _receiving = receiving;
 }
 
