@@ -88,8 +88,8 @@ void			Server::removeClient(int clientId)
   if (it != clients.end())
     {
       tmp = *it;
-      tmp->getSock()->close();
       clients.erase(it);
+      delete (tmp);
     }
 }
 

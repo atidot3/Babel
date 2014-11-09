@@ -6,6 +6,7 @@
 # include	<sys/types.h>
 # include	<sys/socket.h>
 # include	<netdb.h>
+# include	"Include/BabelException.hpp"
 
 class		socketUnix : public ISocket
 {
@@ -18,7 +19,8 @@ public:
     struct protoent	*pe;
 
     pe = getprotobyname("TCP");
-    sock = socket(AF_INET, SOCK_STREAM, pe->p_proto);
+    if ((sock = socket(AF_INET, SOCK_STREAM, pe->p_proto)) == -1)
+      throw BabelException("Can't create socket.");
   }
 
   socketUnix(int fd)
@@ -39,7 +41,7 @@ public:
     sin.sin_port = htons(PORT);
     sin.sin_addr.s_addr = INADDR_ANY;
     if (::bind(sock, (const struct sockaddr *)&sin, sizeof(sin)) == -1)
-      delete(this);
+      throw BabelException("Can't bind socket.");
     return (0);
   }
 
@@ -73,14 +75,18 @@ public:
     return (sock);
   }
 
-  virtual void		sendToSomeone(Proto_Struct *proto, const std::string &ip, int port)
+  virtual bool		sendToSomeone(Proto_Struct *proto, const std::string &ip, int port)
   {
-    write(sock, proto, sizeof(Proto_Struct));
+    if (write(sock, proto, sizeof(Proto_Struct)) == -1)
+      return (false);
+    return (true);
   }
   
-  virtual void		recvFromSomeone(const std::string &ip, int port, Proto_Struct *proto)
+  virtual bool		recvFromSomeone(const std::string &ip, int port, Proto_Struct *proto)
   {
-    read(sock, proto, sizeof(Proto_Struct));
+    if (read(sock, proto, sizeof(Proto_Struct)) <= 0)
+      return (false);
+    return (true);
   }
 };
 typedef socketUnix AbstractSocket;

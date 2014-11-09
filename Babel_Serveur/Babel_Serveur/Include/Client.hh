@@ -8,6 +8,7 @@
 class		Client
 {
 private:
+  bool		_busy;
   int		_id;
   ISocket*	_sock;
   std::string	_ip;
@@ -35,7 +36,9 @@ public:
   void		setPseudo(const std::string &);
   void		setSending(Proto_Struct *);
   void		setReceiving(Proto_Struct *);
-  void		setId(int id);
+  void		setId(int);
+  bool		isBusy() const;
+  void		setBusy(bool);
 };
 
 #endif

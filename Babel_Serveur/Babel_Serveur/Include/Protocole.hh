@@ -6,27 +6,26 @@
 
 class				Protocole
 {
-  typedef			void (Protocole::*ptr)(Server *, Client *);
+  typedef			bool (Protocole::*ptr)(Server *, Client *);
 
 private:
-  ptr			func_tab[9];
+  ptr			func_tab[10];
 
 public:
   Protocole();
   ~Protocole();
   bool			Protocole_to_call(Server *, Client * srv);
-  void			Welcome(Server *, Client *);
+  bool			Welcome(Server *, Client *);
 
 private:
-  void			Contact_List(Server *, Client *);
-  void			Contact_Add(Server *, Client *);
-  void			Contact_Remove(Server *, Client *);
-  void			Contact_Call_Me(Server *, Client *);
-  void			Contact_Call_Refuse(Server *, Client *);
-  void			Contact_To_Call(Server *, Client *);
-  void			Authentification(Server *, Client *);
-  void			Send_Audio(Server *, Client *);
-  void			Disconnect(Server *, Client *);
+  bool			Contact_List(Server *, Client *);
+  bool			Contact_Add(Server *, Client *);
+  bool			Contact_Remove(Server *, Client *);
+  bool			Contact_Call_Me(Server *, Client *);
+  bool			Contact_Call_Refuse(Server *, Client *);
+  bool			Contact_To_Call(Server *, Client *);
+  bool			Authentification(Server *, Client *);
+  bool			Disconnect(Server *, Client *);
 };
 
 #endif // PROTOCOLE

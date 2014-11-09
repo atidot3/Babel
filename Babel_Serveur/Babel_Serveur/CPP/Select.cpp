@@ -54,7 +54,12 @@ void			Select::sendThings(Server *server)
     {
       if (FD_ISSET(client->getSock()->realSock(), &writefds))
 	{
-	  client->getSock()->sendToSomeone(client->getSending(), client->getIp(), PORT);
+	  if (client->getSock()->sendToSomeone(client->getSending(), client->getIp(), PORT) == false)
+	    {
+	      server->removeClient(client->getId());
+	      --i;
+	    }
+	  else
 	  client->setSending(NULL);
 	}
       ++i;
@@ -72,8 +77,13 @@ void			Select::recvThings(Server *server)
     {
       if (FD_ISSET(client->getSock()->realSock(), &readfds))
 	{
-	  client->getSock()->recvFromSomeone(client->getIp(), PORT, proto);
-	  client->setReceiving(proto);
+	  if (client->getSock()->recvFromSomeone(client->getIp(), PORT, proto) == false)
+	    {
+	      server->removeClient(client->getId());
+	      --i;
+	    }
+	  else
+	    client->setReceiving(proto);
 	}
       ++i;
     }

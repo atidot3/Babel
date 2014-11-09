@@ -17,7 +17,7 @@
 #  define  TYPE int
 # endif
 
-# define	PORT	4243
+# define	PORT	4242
 
   enum			PROTOCOLE_ENUM
     {
@@ -50,8 +50,8 @@ public:
   virtual void	close() = 0;
   virtual ISocket*	accept() = 0;
   virtual int	realSock() = 0;
-  virtual void	sendToSomeone(Proto_Struct *, const std::string &, int ) = 0;
-  virtual void	recvFromSomeone(const std::string &, int, Proto_Struct *) = 0;
+  virtual bool	sendToSomeone(Proto_Struct *, const std::string &, int ) = 0;
+  virtual bool	recvFromSomeone(const std::string &, int, Proto_Struct *) = 0;
 };
 
 # ifdef	_WIN32

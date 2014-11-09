@@ -10,6 +10,7 @@ Client::Client(int id)
   _id = id;
   _sending = NULL;
   _receiving = NULL;
+  _busy = false;
 }
 
 Client::Client(ISocket *sock, int id)
@@ -20,6 +21,7 @@ Client::Client(ISocket *sock, int id)
   _id = id;
   _sending = NULL;
   _receiving = NULL;
+  _busy = false;
 }
 
 Client::Client(ISocket *sock, const std::string &ip, int id)
@@ -29,6 +31,7 @@ Client::Client(ISocket *sock, const std::string &ip, int id)
   _id = id;
   _sending = NULL;
   _receiving = NULL;
+  _busy = false;
 }
 
 Client::Client(ISocket *sock, const std::string &ip, const std::string &pseudo, int id)
@@ -39,6 +42,7 @@ Client::Client(ISocket *sock, const std::string &ip, const std::string &pseudo, 
   _id = id;
   _sending = NULL;
   _receiving = NULL;
+  _busy = false;
 }
 
 Client::~Client()
@@ -110,4 +114,14 @@ void			Client::setReceiving(Proto_Struct *receiving)
 void			Client::setId(int id)
 {
   _id = id;
+}
+
+bool			Client::isBusy() const
+{
+  return (_busy);
+}
+
+void			Client::setBusy(bool busy)
+{
+  _busy = busy;
 }
